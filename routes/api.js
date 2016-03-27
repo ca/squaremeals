@@ -39,4 +39,20 @@ router.get('/intake', function(req, res, next) {
   });
 });
 
+router.get('/estimate', function(req, res, next) {
+  var TDEE = req.query.tdee;
+  var kilocalories = req.query.intake;
+  var dailyBurn = req.query.active;
+
+
+  var weekIntake = kilocalories * 7;
+  var weekActiveBurn = dailyBurn * 7;
+  var weekRestBurn = TDEE * 7;
+  var totalWeeklyCalorieDeficit = (weekActiveBurn + weekRestBurn) - weekIntake;
+
+  res.send({
+    'lbs loss / week': totalWeeklyCalorieDeficit / 3500
+  });
+});
+
 module.exports = router;

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="google-signin-client_id" content="914794274234-c782h3krbtbjplt8s9m2bfnsass1vueb.apps.googleusercontent.com">
+    <title>SquareMeals</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+    @font-face {
+      font-family: 'Avenir Next';
+      src: url(/fonts/AvenirNext-Regular.otf);
+    }
+    @font-face {
+      font-family: 'Avenir Next Bold';
+      src: url(/fonts/AvenirNext-Bold.otf);
+    }
+    body {
+      background-color: #001D3E;
+      background: linear-gradient(to bottom right, #001D3E 50%, #002754);
+      background-attachment:fixed;
+      background-repeat:no-repeat;
+      background-size:cover;
+      color: white;
+      font-family: 'Avenir Next';
+      text-align: center;
+      /* Gradient is coming in striped. Check this.*/
+      /*background: linear-gradient(135deg, #001D3E, green);*/
+    }
+    header {
+      height: 500px;
+    }
+    #logo {
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: 20px;
+    }
+    #logo span { font-family: 'Avenir Next Bold'; }
+    .g-signin2 { margin: 0 auto; }
+    div.abcRioButton.abcRioButtonLightBlue { margin: 0 auto; }
+    .profile {
+      display: inline-block;
+      height: 468px;
+      width: 290px;
+    }
+    .profile #profile_photo { border-radius: 50%; }
+    .meal {
+      background: linear-gradient(to bottom, #00AEFF, #004CA4);
+      background-color: lightblue;
+      border-radius: 8px;
+      display: inline-block;
+      height: 468px;
+      width: 290px;
+    }
+    .meal img {
+      border-radius: 50%;
+      margin-top: -65px;
+    }
+    .meal h2 {
+      font-family: 'Avenir Next Bold';
+      font-size: 17px;
+      text-transform: uppercase;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- <form action="/register" method="post">
+      Form
+        name: Birth date
+        name: Weight
+        name: Height
+        name: Activity Level
+        name: Goal
+      <input type="submit" value="Register"/>
+    </form> -->
+    <!-- <a href="/auth/google">Sign In with Google</a> -->
+    <header class="container-fluid">
+      <h1 id="logo">SQUARE<span>MEALS</span></h1>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </header>
+    <section id="demo" class="container-fluid">
+      <article class="meal">
+        <img src="http://placehold.it/150x150">
+        <h2>Grilled Chicken</h2>
+      </article>
+      <article class="meal"></article>
+      <article class="meal"></article>
+      <article id="profile">
+        <img id="profile_photo" src="http://placehold.it/100x100">
+      </article>
+    </section>
+    
+    <a href="#" onclick="signOut();">Sign out</a>
+    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        document.getElementById('profile_photo').src = profile.getImageUrl();
+        // AJAX request to server, if user found -> profile (sign in on server)
+        // else -> register form
+      }
+
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+          // sign out on server
+        });
+      }
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </body>
+</html>
