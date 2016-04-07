@@ -34,6 +34,10 @@
       font-size: 48px;
       font-weight: 400;
       letter-spacing: 20px;
+      height: 50px;
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
     }
     #logo span { font-family: 'Avenir Next Bold'; }
     .g-signin2 { margin: 0 auto; }
@@ -78,14 +82,21 @@
       <h1 id="logo">SQUARE<span>MEALS</span></h1>
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </header>
+
     <section id="demo" class="container-fluid">
-      <article class="meal">
+      <article class="meal col-lg-3">
         <img src="http://placehold.it/150x150">
         <h2>Grilled Chicken</h2>
       </article>
-      <article class="meal"></article>
-      <article class="meal"></article>
-      <article id="profile">
+      <article class="meal col-lg-3"`>
+        <img src="http://placehold.it/150x150">
+        <h2>Grilled Chicken</h2>
+      </article>
+      <article class="meal col-lg-3">
+        <img src="http://placehold.it/150x150">
+        <h2>Grilled Chicken</h2>
+      </article>
+      <article id="profile" class="col-lg-3">
         <img id="profile_photo" src="http://placehold.it/100x100">
       </article>
     </section>
