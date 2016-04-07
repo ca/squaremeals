@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express')
+  , request = require('request');
 var router = express.Router();
 
 /* GET home page. */
@@ -7,7 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/intake', function(req, res, next) {
-
+  // http://cff23fbd.ngrok.io/api/intake?activityLevel=5&weight=190&goal=bulk
+  // That is an example of using the "intake" API call. It takes in your activityLevel (acale of 1 - 5, 5 being very active 1 being sedentary)
   var TDEE = req.query.tdee;
 
   var activityLevel = req.query.activityLevel;
@@ -55,4 +57,20 @@ router.get('/estimate', function(req, res, next) {
   });
 });
 
+router.get('/generate', function(req, res, next) {
+  request({
+    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByNutrients?maxcalories=100&maxcarbs=100&maxfat=100&maxprotein=100&mincalories=0&minCarbs=0&minfat=0&minProtein=0',
+    method: 'GET',
+    headers: {
+      'X-Mashape-Key': 'VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S'
+    }
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.send(body) // Print the google web page.
+    }
+  });
+  // 
+  // set header with X-Mashape-Key: VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S
+});
 module.exports = router;
