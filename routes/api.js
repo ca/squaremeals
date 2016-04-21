@@ -58,8 +58,25 @@ router.get('/estimate', function(req, res, next) {
 });
 
 router.get('/generate', function(req, res, next) {
+  var url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByNutrients?';
+  var maxcalories = 0
+    , maxfat = 0
+    , maxprotein = 0
+    , mincalories = 0
+    , minCarbs = 0
+    , minfat = 0
+    , minProtein = 0;
+  url += 'maxcalories='+maxcalories
+          +'&maxcarbs='+maxcarbs
+          +'&maxfat='+maxfat
+          +'&maxprotein='+maxprotein
+          +'&mincalories='+mincalories
+          +'&minCarbs='+minCarbs
+          +'&minfat'+minfat
+          +'&minProtein'+minProtein;
+
   request({
-    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByNutrients?maxcalories=100&maxcarbs=100&maxfat=100&maxprotein=100&mincalories=0&minCarbs=0&minfat=0&minProtein=0',
+    url: url,
     method: 'GET',
     headers: {
       'X-Mashape-Key': 'VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S'
