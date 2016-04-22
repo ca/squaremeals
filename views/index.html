@@ -37,17 +37,19 @@
       height: 50px;
       margin: auto;
       position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
+      top: -50%; left: 0; bottom: 0; right: 0;
     }
     #logo span { font-family: 'Avenir Next Bold'; }
-    .g-signin2 { margin: 0 auto; }
+    .g-signin2 {
+          position: absolute;
+          top: 33%; left: 0; bottom: 0; right: 0;
+    }
     div.abcRioButton.abcRioButtonLightBlue { margin: 0 auto; }
     .profile {
       display: inline-block;
       height: 468px;
       width: 290px;
     }
-    .profile #profile_photo { border-radius: 50%; }
     .meal {
       background: linear-gradient(to bottom, #00AEFF, #004CA4);
       background-color: lightblue;
@@ -55,6 +57,14 @@
       display: inline-block;
       height: 468px;
       width: 290px;
+      position: relative;
+      top: 100px;
+    }
+    #meal1{
+      top: 230px;
+    }
+    #meal3{
+      top: 180px;
     }
     .meal img {
       border-radius: 50%;
@@ -74,6 +84,23 @@
       font-family: 'Avenir Next Bold';
       text-align: right;
     }
+    .meal_header{
+          font-size: 17px;
+          position: absolute;
+          left: 90px;
+          text-transform: uppercase;
+          top: -15px;
+    }
+    #meal_header1{
+          top: 115px;
+    }
+    #meal_header3{
+          top: 65px;
+    }
+      .bold{
+          font-family: 'Avenir Next Bold';
+      }
+
     </style>
   </head>
   <body>
@@ -87,14 +114,15 @@
       <input type="submit" value="Register"/>
     </form> -->
     <!-- <a href="/auth/google">Sign In with Google</a> -->
-    <header class="container-fluid">
+    <header class="container-fluid half">
       <h1 id="logo">SQUARE<span>MEALS</span></h1>
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      <div class="g-signin2" data-onsuccess="onSignIn"> </div>
     </header>
 
     <section id="demo" class="container-fluid">
-      <div class="col-lg-3">
-        <article class="meal">
+      <div class="col-lg-3 col-md-3">
+        <h1 class="meal_header" id="meal_header1"> <span class="bold">Meal 1 </span>&middot 9:00am</h1>
+        <article class="meal" id="meal1">
           <img src="/images/chicken.png">
           <h2> Grilled Chicken</h2>
           <div class="mealInfo">  
@@ -113,7 +141,8 @@
             </div>
         </article>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-3">
+        <h1 class="meal_header"> <span class="bold">Meal 2 </span>&middot 1:00pm</h1>
         <article class="meal">
           <img src="/images/pasta.png">
           <h2>Pasta Bolognese</h2>
@@ -133,8 +162,9 @@
             </div>
         </article>
       </div>
-      <div class="col-lg-3">
-        <article class="meal">
+      <div class="col-lg-3 col-md-3">
+        <h1 class="meal_header" id="meal_header3"> <span class="bold">Meal 3 </span>&middot 7:00pm</h1>
+        <article class="meal" id="meal3">
           <img src="/images/salad.jpg">
           <h2> Vegetable Rice</h2>
           <div class="mealInfo">  
@@ -153,12 +183,12 @@
             </div>
         </article>
       </div>
-      <article id="profile" class="col-lg-3">
-        <img id="profile_photo" src="http://placehold.it/100x100">
+      <article id="profile" class="col-lg-3 col-md-3 col-sm-3">
+        <img id="profile_photo" style="border-radius: 50%; width: 100px;" src="images/fran.jpg">
       </article>
     </section>
     
-    <a href="#" onclick="signOut();">Sign out</a>
+    <!--a href="#" onclick="signOut();">Sign out</a-->
     
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
