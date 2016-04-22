@@ -9,7 +9,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/intake', function(req, res, next) {
   // http://cff23fbd.ngrok.io/api/intake?activityLevel=5&weight=190&goal=bulk
-  // That is an example of using the "intake" API call. It takes in your activityLevel (acale of 1 - 5, 5 being very active 1 being sedentary)
+  // Activity Level (1 - 5)
+  // Weight
+  // Goal (cut / bulk / maintain)
   var TDEE = req.query.tdee;
 
   var activityLevel = req.query.activityLevel;
@@ -46,7 +48,6 @@ router.get('/estimate', function(req, res, next) {
   var kilocalories = req.query.intake;
   var dailyBurn = req.query.active;
 
-
   var weekIntake = kilocalories * 7;
   var weekActiveBurn = dailyBurn * 7;
   var weekRestBurn = TDEE * 7;
@@ -62,6 +63,7 @@ router.get('/generate', function(req, res, next) {
   var maxcalories = 0
     , maxfat = 0
     , maxprotein = 0
+    , maxcarbs = 0
     , mincalories = 0
     , minCarbs = 0
     , minfat = 0
