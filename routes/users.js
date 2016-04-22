@@ -11,11 +11,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/register', function(req, res, next) {
+  var username = req.query.username,
+      email = req.query.email;
+
   db.get().collection('users').insertOne({
-    'username': 'test',
-    'password': 'test'
+    'username': username,
+    'email': email
   }, function(err, result) {
-      console.log("Inserted a document into the restaurants collection.");
+      console.log("Inserted a document into the users collection.");
       res.send("COMPLETED");
   });
 });
