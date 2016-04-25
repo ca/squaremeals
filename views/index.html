@@ -202,13 +202,14 @@
         document.getElementById('profile_photo').src = profile.getImageUrl();
         // AJAX request to server, if user found -> profile (sign in on server)
         // else -> register form;
+        var url = '/users/register?email=' + profile.getEmail();
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/users');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.open('GET', url);
+        xhr.setRequestHeader('Content-Type', 'text/json');
         xhr.onload = function() {
           console.log('Signed in as: ' + xhr.responseText);
         };
-        xhr.send('email=' + profile.getEmail());
+        xhr.send();
       }
 
       function signOut() {
