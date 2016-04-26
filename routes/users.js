@@ -1,5 +1,10 @@
 var express = require('express');
 var router = express.Router();
+// var bodyParser = require('body-parser')
+// app.use( bodyParser.json() );       // to support JSON-encoded bodies
+// app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+//   extended: true
+// })); 
 
 var db = require('../db');
 
@@ -32,13 +37,27 @@ router.get('/register', function(req, res, next) {
           // res.sendFile('signup.html', {root: 'views' });
 
       });
+    } else {
+      console.log("Found a user, skip to meals page");
+      console.log(result);
+      // res.send("MEALS PAGE HERE");
+      res.send({redirect: '/dashboard?email='+email});
     }
-    console.log("Found a user, skip to meals page");
-    console.log(result);
-    // res.send("MEALS PAGE HERE");
-    res.send({redirect: '/dashboard'});
   });
+});
 
+router.post('/register', function(req, res, next) {
+  console.log(req.body);
+  db.get().collection('users').update({
+    'email': req.body.email
+  }, {
+    $set: {
+      'weight': req.body.weight,
+      'goal': req.body.goal,
+      'activity_level': req.body.activity_level
+    }
+  });
+  res.redirect('/dashboard?email='+req.body.email);
 });
 
 router.get('/find', function(req, res, next) {
