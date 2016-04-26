@@ -341,7 +341,7 @@
         document.getElementById('profile_photo').src = profile.getImageUrl();
         // AJAX request to server, if user found -> profile (sign in on server)
         // else -> register form;
-        var url = '/users/register?email=' + profile.getEmail();
+        var url = '/users/register?email=' + profile.getEmail() + '&image=' + profile.getImageUrl();
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url);
         xhr.setRequestHeader('Content-Type', 'text/json');

@@ -5,7 +5,14 @@ var passport = require('passport');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.sendFile('index.html', {root: 'views' })
-  // res.render('index', { title: 'Express' });
+});
+
+router.get('/signup', function(req, res, next) {
+	res.sendFile('signup.html', {root: 'views' })
+});
+
+router.get('/dashboard', function(req, res, next) {
+	res.sendFile('viewPlan.html', {root: 'views' })
 });
 
 router.get('/auth/google', passport.authenticate('google'));
