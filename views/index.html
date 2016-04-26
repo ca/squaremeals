@@ -6,6 +6,8 @@
     <title>SquareMeals</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="icon" href="images/icon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>  
     <style>
     @font-face {
       font-family: 'Avenir Next';
@@ -16,6 +18,8 @@
       src: url(/fonts/AvenirNext-Bold.otf);
     }
     body {
+      padding: 0px;
+      margin: 0px;
       background-color: #001D3E;
       background: linear-gradient(to bottom right, #001D3E 50%, #002754);
       background-attachment:fixed;
@@ -23,48 +27,48 @@
       background-size:cover;
       color: white;
       font-family: 'Avenir Next';
+      font-size: 17px;
       text-align: center;
       /* Gradient is coming in striped. Check this.*/
       /*background: linear-gradient(135deg, #001D3E, green);*/
     }
-    header {
-      height: 500px;
+    #content{
+      max-width: 1230px;
+      margin: auto;
+      width: 95%;
+    }
+    #container{
+      margin: auto;
+      text-align: center;
+      position: absolute;
+      bottom: -200px;
     }
     #logo {
       font-size: 48px;
       font-weight: 400;
       letter-spacing: 20px;
       height: 50px;
-      margin: auto;
-      position: absolute;
-      top: -50%; left: 0; bottom: 0; right: 0;
+      margin: 50px;
     }
-    #logo span { font-family: 'Avenir Next Bold'; }
+    #logo span {
+      font-family: 'Avenir Next Bold';
+    }
     .g-signin2 {
-          position: absolute;
-          top: 33%; left: 0; bottom: 0; right: 0;
+      width: 200px;
+      margin: auto;
+      margin-bottom: 50px;
     }
-    div.abcRioButton.abcRioButtonLightBlue { margin: 0 auto; }
-    .profile {
-      display: inline-block;
-      height: 468px;
-      width: 290px;
+    div.abcRioButton.abcRioButtonLightBlue{
     }
     .meal {
       background: linear-gradient(to bottom, #00AEFF, #004CA4);
       background-color: lightblue;
       border-radius: 8px;
-      display: inline-block;
-      height: 468px;
+      height: 400px;
       width: 290px;
-      position: relative;
-      top: 100px;
-    }
-    #meal1{
-      top: 230px;
-    }
-    #meal3{
-      top: 180px;
+      float: left;
+      margin-right: 20px;
+      margin-top: 80px;
     }
     .meal img {
       border-radius: 50%;
@@ -74,34 +78,138 @@
       font-family: 'Avenir Next Bold';
       font-size: 17px;
       text-transform: uppercase;
+      margin-bottom: 20px;
     }
     .mealInfo{
-      font-family: 'Avenir Next';
-      font-size: 17px;
       text-align: left;
     }
     .mealInfo .numbers{
       font-family: 'Avenir Next Bold';
       text-align: right;
+      width: 40%;
+      float: left;
+      margin-right: 10px;
+    }
+    .meal_button{
+      border: solid 1px white;
+      border-radius: 20px;
+      padding-top: 5px;
+      height: 35px;
+      width: 230px;
+      text-align: center;
+      margin: auto;
+      margin-top: 20px;
+      background-image: url(images/check.png);
+      background-repeat: no-repeat;
+      background-position: 20px 10px; 
+    }
+    #meal1, #meal2, #meal3{
+      display: block;
+      float: left;
+      padding-top: 30px;
+    }
+    #meal1{
+      margin-top: 100px;
+    }
+    #meal3{
+      margin-top: 150px;
     }
     .meal_header{
-          font-size: 17px;
-          position: absolute;
-          left: 90px;
-          text-transform: uppercase;
-          top: -15px;
+        font-size: 17px;
+        text-transform: uppercase;
     }
-    #meal_header1{
-          top: 115px;
+    .bottom{
+      margin-top: 10px;
+      background-image: url(images/X.png);
     }
-    #meal_header3{
-          top: 65px;
-    }
-      .bold{
+    .bold{
           font-family: 'Avenir Next Bold';
+    }
+    #profile{
+      float: left;
+      height: 468px;
+      width: 290px;
+      margin-top: 200px;
+    }
+    #profile_info{
+      font-size: 21px;
+    }
+    #profile_info #first_name{
+      text-transform: uppercase;
+      font-size: 21px;
+    }
+    #profile_info #weight{
+      margin-bottom: 40px;
+    }
+    #profile_info #numbers{
+      text-align: right;
+      width: 40%;
+      float: left;
+      margin-right: 10px;
+    }
+    #profile_info #labels{
+      text-align: left; 
+    }
+    #profile_info .bottom_signIn{
+      margin-top: 40px;
+    }
+    #demo{
+      margin: auto;
+    }
+    #catchy-phrase{
+      margin-bottom: 100px;
+    }
+    #catchy-phrase h2{
+      font-family: 'Avenir Next Bold';
+      text-transform: uppercase;
+      font-size: 48px;
+    }
+    #catchy-phrase h3{
+      color: #00adfe;
+      font-size: 36px;
+    }
+    @media (max-width: 990px) {
+      #content{
+        width: 600px;
       }
-
+      #meal2 {
+        display: none;
+      }
+    }
+    @media (max-width: 1290px) {
+      #content{
+        max-width: 910px;
+      }
+      #meal3 {
+        display: none;
+      }
+    }
     </style>
+    <script>
+    $( document ).ready(function() {
+        $('#catchy-phrase').hide();
+    });
+    $(window).scroll(function (event) {
+      var scroll = $(window).scrollTop();
+      console.log(scroll);
+      $('#meal1').css('margin-top', 150-scroll);
+      $('#meal2').css('margin-top', 80-(scroll/1.53846153846));
+      $('#meal3').css('margin-top', 200-scroll*1.25);
+      $('#profile').css('margin-top', 350-scroll*1.25);
+      if (scroll >= 100){
+        $('#logo').fadeOut();
+        $('.top_sign_in').fadeOut(function() {
+            $('#catchy-phrase').fadeIn();
+        });
+      }
+      else{
+        $('#catchy-phrase').fadeOut(function() {
+          $('#logo').fadeIn();
+          $('.top_sign_in').fadeIn();
+        });
+      }
+    });
+    </script>
   </head>
   <body>
     <!-- <form action="/register" method="post">
@@ -114,80 +222,111 @@
       <input type="submit" value="Register"/>
     </form> -->
     <!-- <a href="/auth/google">Sign In with Google</a> -->
-    <header class="container-fluid half">
-      <h1 id="logo">SQUARE<span>MEALS</span></h1>
-      <div class="g-signin2" data-onsuccess="onSignIn"> </div>
-    </header>
+    <div id="content">
+    <div id="container">
+      <headers>
+        <h1 id="logo">SQUARE<span>MEALS</span></h1>
+        <div id="catchy-phrase">
+          <h2> Nutrition powered by your life </h2>
+          <h3> Achieve your goals without making tracking nutrition a chore. </h3>
+        </div>
+        <div class="g-signin2 top_sign_in" data-onsuccess="onSignIn"> </div>
+      </header>
 
-    <section id="demo" class="container-fluid">
-      <div class="col-lg-3 col-md-3">
-        <h1 class="meal_header" id="meal_header1"> <span class="bold">Meal 1 </span>&middot 9:00am</h1>
-        <article class="meal" id="meal1">
-          <img src="/images/chicken.png">
-          <h2> Grilled Chicken</h2>
-          <div class="mealInfo">  
-            <div class="col-lg-5 col-sm-5 col-md-5 numbers">
-                <p > 877 </p>
-                <p> 40g </p>
-                <p> 6g </p>
-                <p> 33g </p>
-              </div>
-              <div class="col-lg-7 col-sm-7 col-md-7">
-                <p> Kilocalories </p>
-                <p> Protein </p>
-                <p> Carbs </p>
-                <p> Fat </p>
-              </div>
-            </div>
-        </article>
-      </div>
-      <div class="col-lg-3 col-md-3">
-        <h1 class="meal_header"> <span class="bold">Meal 2 </span>&middot 1:00pm</h1>
-        <article class="meal">
-          <img src="/images/pasta.png">
-          <h2>Pasta Bolognese</h2>
+      <section id="demo">
+        <div id="meal1">
+          <h1 class="meal_header" id="meal_header1"> <span class="bold">Meal 1 </span>&middot 9:00am</h1>
+          <article class="meal">
+            <img src="/images/chicken.png">
+            <h2> Grilled Chicken</h2>
             <div class="mealInfo">  
-            <div class="col-lg-5 col-sm-5 col-md-5 numbers">
-                <p > 560 </p>
-                <p> 22g </p>
-                <p> 18g </p>
-                <p> 67g </p>
+              <div class="numbers">
+                  <p > 877 </p>
+                  <p> 40g </p>
+                  <p> 6g </p>
+                  <p> 33g </p>
+                </div>
+                <div>
+                  <p> Kilocalories </p>
+                  <p> Protein </p>
+                  <p> Carbs </p>
+                  <p> Fat </p>
+                </div>
               </div>
-              <div class="col-lg-7 col-sm-7 col-md-7">
-                <p> Kilocalories </p>
-                <p> Protein </p>
-                <p> Carbs </p>
-                <p> Fat </p>
+              <div class="meal_button"> Select Meal </div>
+              <div class="meal_button bottom">I Don't Like This </div>          
+          </article>
+        </div>
+        <div id="meal2">
+          <h1 class="meal_header"> <span class="bold">Meal 2 </span>&middot 1:00pm</h1>
+          <article class="meal">
+            <img src="/images/pasta.png">
+            <h2>Pasta Bolognese</h2>
+              <div class="mealInfo">  
+              <div class="numbers">
+                  <p > 560 </p>
+                  <p> 22g </p>
+                  <p> 18g </p>
+                  <p> 67g </p>
+                </div>
+                <div>
+                  <p> Kilocalories </p>
+                  <p> Protein </p>
+                  <p> Carbs </p>
+                  <p> Fat </p>
+                </div>
               </div>
-            </div>
+              <div class="meal_button"> Select Meal </div>
+              <div class="meal_button bottom"> I Don't Like This </div>
+          </article>
+        </div>
+        <div id="meal3">
+          <h1 class="meal_header" id="meal_header3"> <span class="bold">Meal 3 </span>&middot 7:00pm</h1>
+          <article class="meal">
+            <img src="/images/salad.jpg">
+            <h2> Vegetable Rice</h2>
+            <div class="mealInfo">  
+              <div class="numbers">
+                  <p > 640 </p>
+                  <p> 32g </p>
+                  <p> 12g </p>
+                  <p> 14g </p>
+                </div>
+                <div>
+                  <p> Kilocalories </p>
+                  <p> Protein </p>
+                  <p> Carbs </p>
+                  <p> Fat </p>
+                </div>
+              </div>
+              <div class="meal_button"> Select Meal </div>
+              <div class="meal_button bottom"> I Don't Like This </div>
+          </article>
+        </div>
+        <article id="profile">
+          <img id="profile_photo" style="border-radius: 50%; width: 100px; margin-top: -100px;" src="images/niceGuy.jpg">
+          <div id="profile_info">
+            <p id="first_name"> John <span class="bold">Doe</span></p>
+            <p id="weight"> 174 Pounds </p>
+              <div id="numbers">
+                  <p > 2,095 </p>
+                  <p> 255g </p>
+                  <p> 17g </p>
+                  <p> 185g </p>
+                </div>
+                <div id="labels">
+                  <p> Kilocalories </p>
+                  <p> Protein </p>
+                  <p> Carbs </p>
+                  <p> Fat </p>
+                </div>
+              <div class="g-signin2 bottom_signIn" data-onsuccess="onSignIn" style="margin-left:90px"> </div>
+          </div>
         </article>
+      </section>
+    </div>
       </div>
-      <div class="col-lg-3 col-md-3">
-        <h1 class="meal_header" id="meal_header3"> <span class="bold">Meal 3 </span>&middot 7:00pm</h1>
-        <article class="meal" id="meal3">
-          <img src="/images/salad.jpg">
-          <h2> Vegetable Rice</h2>
-          <div class="mealInfo">  
-            <div class="col-lg-5 col-sm-5 col-md-5 numbers">
-                <p > 640 </p>
-                <p> 32g </p>
-                <p> 12g </p>
-                <p> 14g </p>
-              </div>
-              <div class="col-lg-7 col-sm-7 col-md-7">
-                <p> Kilocalories </p>
-                <p> Protein </p>
-                <p> Carbs </p>
-                <p> Fat </p>
-              </div>
-            </div>
-        </article>
-      </div>
-      <article id="profile" class="col-lg-3 col-md-3 col-sm-3">
-        <img id="profile_photo" style="border-radius: 50%; width: 100px;" src="images/fran.jpg">
-      </article>
-    </section>
-    
+
     <!--a href="#" onclick="signOut();">Sign out</a-->
     
     <script src="https://apis.google.com/js/platform.js" async defer></script>

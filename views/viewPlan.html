@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="google-signin-client_id" content="914794274234-c782h3krbtbjplt8s9m2bfnsass1vueb.apps.googleusercontent.com">
+    <title>SquareMeals</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="icon" href="images/icon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="../public/js/jquery.flip.min.js"></script>
+    <style>
+    @font-face {
+      font-family: 'Avenir Next';
+      src: url(/fonts/AvenirNext-Regular.otf);
+    }
+    @font-face {
+      font-family: 'Avenir Next Bold';
+      src: url(/fonts/AvenirNext-Bold.otf);
+    }
+    body {
+      padding: 0px;
+      margin: 0px;
+      background-color: #001D3E;
+      background: linear-gradient(to bottom right, #001D3E 50%, #002754);
+      background-attachment:fixed;
+      background-repeat:no-repeat;
+      background-size:cover;
+      color: white;
+      font-family: 'Avenir Next';
+      font-size: 17px;
+    }
+    #container{
+      width: 95%;
+      max-width: 1350px;
+      margin: auto;
+      text-align: center;
+    }
+    #logo {
+      text-align: left;
+      font-size: 25px;
+      font-weight: 400;
+      letter-spacing: 10px;
+      margin-top: 40px;
+      float: left;
+    }
+    #logo span {
+      font-family: 'Avenir Next Bold';
+    }
+    #profile_photo{
+      border-radius: 50%;
+      width: 50px;
+      -webkit-box-shadow: 0 7px 6px -6px black;
+	  -moz-box-shadow: 0 7px 6px -6px black;
+	  box-shadow: 0 7px 6px -6px black;
+      margin-top: 30px;
+      margin-bottom: 40px;
+      float: left;
+    }
+    #top_corner{
+      float:right;
+      width: 200px;
+    }
+    #top_corner a{
+      font-family: 'Avenir Next Bold';
+      text-transform: uppercase;
+      color: white;
+      margin-top: 45px;
+      margin-left: 15px;
+      float: left;
+    }
+    #top_corner a:hover{
+      cursor: pointer;
+      opacity: .8;
+      text-decoration: none;
+      text-decoration: none;
+    }
+    .meal {
+      background: linear-gradient(to bottom, #00AEFF, #004CA4);
+      background-color: lightblue;
+      border-radius: 8px;
+      height: 400px;
+      width: 290px;
+      float: left;
+      margin-right: 80px;
+      margin-top: 80px;
+    }
+    .meal img {
+      border-radius: 50%;
+      margin-top: -65px;
+    }
+    .meal h2 {
+      font-family: 'Avenir Next Bold';
+      font-size: 17px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .mealInfo{
+      text-align: left;
+    }
+    .mealInfo .numbers{
+      font-family: 'Avenir Next Bold';
+      text-align: right;
+      width: 40%;
+      float: left;
+      margin-right: 10px;
+    }
+    .meal_button{
+      border: solid 1px white;
+      border-radius: 20px;
+      padding-top: 5px;
+      height: 35px;
+      width: 230px;
+      text-align: center;
+      margin: auto;
+      margin-top: 20px;
+      background-image: url(images/check.png);
+      background-repeat: no-repeat;
+      background-position: 20px 10px; 
+    }
+    .meal_button:hover{
+      background-color: white;
+      cursor: pointer;
+      color: #005cb3;
+    }
+    .meal_header{
+        font-size: 17px;
+        text-transform: uppercase;
+        margin-left: -80px;
+    }
+    .bottom{
+      margin-top: 10px;
+      background-image: url(images/X.png);
+    }
+    #meal1, #meal2, #meal3{
+        float: left;
+    }
+    #meal3_inner{
+      margin-right: 0px;
+      float: left;
+    }
+    #meal_header3{
+      margin-left: 0px;
+    }
+    header{
+      height: 150px;
+    }
+    #today{
+      width: 100%;
+      display: block;
+      margin: auto;
+    }
+    #date{
+        margin-bottom: 60px;
+        text-transform: uppercase;
+    }
+    .bold{
+        font-family: 'Avenir Next Bold';
+    }
+    #back_arrow{
+      float: left;
+      margin-top: 250px;
+      margin-right: 50px;
+    }
+    #forward_arrow{
+      float: left;
+      margin-left: 50px;
+      margin-top: 250px;
+    }
+    .arrow:hover{
+      cursor: pointer;
+      opacity: .4;
+    }
+    #meals{
+      max-width: 1260px;
+      margin: auto;
+      padding-left: 20px;
+    }
+    </style>
+    <script>
+      
+    $(document).ready(function () {
+      $('.bottom').click(function () {
+        var meal = $(this).parent('.meal');
+        $(meal).effect("shake","slow");
+        $(meal).contents().fadeOut(function() {
+          $(meal).contents().fadeIn();
+        });
+      });
+      $('.meal_card').hover(function () {
+        $('.meal_card').css('opacity', '.5');
+        $('.meal_card').css('margin-top', '0');
+        $(this).css('opacity', 1);
+        $(this).css('margin-top', -10);
+      });
+    });
+    </script>
+    
+    <script>
+$(function(){
+    $(".flip").flip({
+        trigger: 'click';
+    });
+});
+</script>
+    
+  </head>
+  <body>
+    <div id="container">
+      <header>
+      <h1 id="logo">SQUARE<span>MEALS</span></h1>
+      <div id="top_corner">
+        <img id="profile_photo" src="images/niceGuy.jpg">
+        <a href="#" onclick="signOut();">Sign out</a>
+      </div>
+      </header>
+      <div id="today">
+      <p id="date"> Monday, 25 April 2016</p>
+      <div id="meals">
+      <img src="images/left.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="back_arrow">
+      <div id="meal1" class="meal_card flip">
+          <h1 class="meal_header" id="meal_header1"> <span class="bold">Meal 1 </span>&middot 9:00am</h1>
+          <article class="meal front">
+            <img src="/images/salad.jpg">
+            <h2> Vegetable Rice</h2>
+            <div class="mealInfo">  
+              <div class="numbers">
+                  <p > 640 </p>
+                  <p> 32g </p>
+                  <p> 12g </p>
+                  <p> 14g </p>
+                </div>
+                <div>
+                  <p> Kilocalories </p>
+                  <p> Protein </p>
+                  <p> Carbs </p>
+                  <p> Fat </p>
+                </div>
+              </div>
+              <div class="meal_button"> Select Meal </div>
+              <div class="meal_button bottom"> I Don't Like This </div>
+          </article>
+          <article class="back">
+            <div class="mealInfo">  
+              <div class="numbers">
+                  <p > 640 </p>
+                  <p> 32g </p>
+                  <p> 12g </p>
+                  <p> 14g </p>
+                </div>
+                <div>
+                  <p> Kilocalories </p>
+                  <p> Protein </p>
+                  <p> Carbs </p>
+                  <p> Fat </p>
+                </div>
+              </div>
+          </article>
+        </div>
+      <div id="meal2"  class="meal_card">
+          <h1 class="meal_header"> <span class="bold">Meal 2 </span>&middot 1:00pm</h1>
+          <article class="meal">
+            <img src="/images/pasta.png">
+            <h2>Pasta Bolognese</h2>
+              <div class="mealInfo">  
+              <div class="numbers">
+                  <p > 560 </p>
+                  <p> 22g </p>
+                  <p> 18g </p>
+                  <p> 67g </p>
+                </div>
+                <div>
+                  <p> Kilocalories </p>
+                  <p> Protein </p>
+                  <p> Carbs </p>
+                  <p> Fat </p>
+                </div>
+              </div>
+              <div class="meal_button"> Select Meal </div>
+              <div class="meal_button bottom"> I Don't Like This </div>
+          </article>
+        </div>
+        <div id="meal3"  class="meal_card">
+          <h1 class="meal_header" id="meal_header3"> <span class="bold">Meal 3 </span>&middot 7:00pm</h1>
+          <article class="meal" id="meal3_inner">
+            <img src="/images/salad.jpg">
+            <h2> Vegetable Rice</h2>
+            <div class="mealInfo">  
+              <div class="numbers">
+                  <p > 640 </p>
+                  <p> 32g </p>
+                  <p> 12g </p>
+                  <p> 14g </p>
+                </div>
+                <div>
+                  <p> Kilocalories </p>
+                  <p> Protein </p>
+                  <p> Carbs </p>
+                  <p> Fat </p>
+                </div>
+              </div>
+              <div class="meal_button"> Select Meal </div>
+              <div class="meal_button bottom"> I Don't Like This </div>
+          </article>
+        </div>
+        <img src="images/right.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="forward_arrow">
+        </div>
+        </div>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      function onSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+        var profile = googleUser.getBasicProfile();
+        document.getElementById('name').textContent = profile.getName();
+        document.getElementById('profile_photo').src = profile.getImageUrl();
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'localhost:3000/api/tokensignin');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+          console.log('Signed in as: ' + xhr.responseText);
+        };
+        xhr.send('idtoken=' + id_token);
+      }
+
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+          // sign out on server
+        });
+      }
+    </script>
+    
+  </body>
+</html>
