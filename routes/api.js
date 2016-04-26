@@ -1,5 +1,6 @@
 var express = require('express')
   , request = require('request');
+var async = require('async');
 var router = express.Router();
 
 /* GET home page. */
@@ -12,7 +13,9 @@ router.get('/intake', function(req, res, next) {
   // Activity Level (1 - 5)
   // Weight
   // Goal (cut / bulk / maintain)
-  var TDEE = req.query.tdee;
+  // var TDEE = req.query.tdee;
+
+  console.log("INTAKE API CALL");
 
   var activityLevel = req.query.activityLevel;
   var weight = req.query.weight;
@@ -35,7 +38,7 @@ router.get('/intake', function(req, res, next) {
   carbs = (kilocalories - (protein * 4) - (fat * 9)) / 4;
 
 
-  res.send({
+  res.json({
     'kilocalories': kilocalories,
     'protein': protein,
     'carbs': carbs,
@@ -59,23 +62,46 @@ router.get('/estimate', function(req, res, next) {
 });
 
 router.get('/generate', function(req, res, next) {
+
+  // var maxcalories = 0
+  //   , maxcarbs = 0
+  //   , maxfat = 0
+  //   , maxprotein = 0
+  var mincalories = 0
+    , minprotein = 0
+    , mincarbs = 0
+    , minfat = 0;
+
+  var weight = req.query.weight.substring(0,4);
+
+  console.log(weight);
+
+  request({
+    url: 'http://ead089f2.ngrok.io/api/intake?activityLevel='+parseInt(req.query.activityLevel)+'&weight='+parseInt(weight)+'&goal='+req.query.goal,
+    method: 'GET'
+  }, function (error, response, body) {
+    console.log(error);
+    console.log(body);
+    mincalories = body.kilocalories / 3;
+    minprotein = body.protein / 3;
+    mincarbs = body.carbs / 3;
+    minfat = body.fat / 3;
+
+    // mincalories = maxcalories - 10;
+    // minprotein = maxprotein - 10;
+    // mincarbs = maxcarbs - 10;
+    // minfat = maxfat - 10;
+  });
+
   var url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByNutrients?';
-  var maxcalories = 0
-    , maxfat = 0
-    , maxprotein = 0
-    , maxcarbs = 0
-    , mincalories = 0
-    , minCarbs = 0
-    , minfat = 0
-    , minProtein = 0;
-  url += 'maxcalories='+maxcalories
-          +'&maxcarbs='+maxcarbs
-          +'&maxfat='+maxfat
-          +'&maxprotein='+maxprotein
-          +'&mincalories='+mincalories
-          +'&minCarbs='+minCarbs
-          +'&minfat'+minfat
-          +'&minProtein'+minProtein;
+  // url += 'maxcalories='+maxcalories
+  //         +'&maxcarbs='+maxcarbs
+  //         +'&maxfat='+maxfat
+  //         +'&maxprotein='+maxprotein
+    url += '&mincalories='+mincalories
+          +'&mincarbs='+mincarbs
+          +'&minfat='+minfat
+          +'&minprotein='+minprotein;
 
   request({
     url: url,
@@ -83,13 +109,76 @@ router.get('/generate', function(req, res, next) {
     headers: {
       'X-Mashape-Key': 'VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S'
     }
-
   }, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      res.send(body) // Print the google web page.
-    }
+    if(error) { console.log(error); callback(true); return; }
+
+
+    var d = new Date();
+    var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var monthnames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    
+    var n = weekday[d.getDay()];
+    var day = d.getDate();
+    var month = monthnames[d.getMonth()];
+    var dateString = n + ", " + day + " " + month + " " + d.getFullYear();
+
+    var meals = [ JSON.parse(body)[0], JSON.parse(body)[1], JSON.parse(body)[2] ];
+    console.log(body);
+    // db.get().collection('users').update({
+    //   'email': req.body.email
+    // }, {
+    //   $set: {
+    //     "day": {
+    //       "dateString": dateString,
+    //       "meals": [ body[0], body[1], body[2] ]
+    //     }
+    //   }
+    // });
+    res.json({
+      "dateString": dateString,
+      "meals": meals
+    });
+    // res.redirect('/dashboard?email='+req.body.email);
+
+
   });
-  // 
+
+  // async.parallel([
+  //   function(callback) {
+  //     request({
+  //       url: url,
+  //       method: 'GET',
+  //       headers: {
+  //         'X-Mashape-Key': 'VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S'
+  //       }
+  //     }, function (error, response, body) {
+  //       if(error) { console.log(error); callback(true); return; }
+  //       callback(false, JSON.parse(body));
+  //     });
+  //   },
+  //   function(callback) {
+      
+  //   },
+  //   function(callback) {
+  //     request({
+  //       url: url,
+  //       method: 'GET',
+  //       headers: {
+  //         'X-Mashape-Key': 'VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S'
+  //       }
+  //     }, function (error, response, body) {
+  //       if(error) { console.log(error); callback(true); return; }
+  //       callback(false, JSON.parse(body));
+  //     });
+  //   }
+  // ],
+  // function(err, results) {
+  //   if(err) { console.log(err); res.send(500,"Server Error"); return; }
+  //   console.log(results);
+  //   // res.send({api1:results[0], api2:results[1]});
+  // });
+
+
   // set header with X-Mashape-Key: VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S
 });
 module.exports = router;

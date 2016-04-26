@@ -68,10 +68,7 @@ router.get('/find', function(req, res, next) {
     if (result == null) {
       res.send("ERROR");
     }
-    res.json({
-      'image': result.image,
-      'name': result.name
-    });
+    res.json(result);
   });
 });
 

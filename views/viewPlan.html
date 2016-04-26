@@ -92,6 +92,12 @@
       border-radius: 50%;
       margin-top: -65px;
     }
+    .thumb {
+      border-radius: 50%;
+      margin-top: -65px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .meal h2 {
       font-family: 'Avenir Next Bold';
       font-size: 17px;
@@ -137,6 +143,7 @@
     }
     #meal1, #meal2, #meal3{
         float: left;
+        margin-bottom: 50px;
     }
     #meal3_inner{
       margin-right: 0px;
@@ -212,101 +219,102 @@
       <h1 id="logo">SQUARE<span>MEALS</span></h1>
       <div id="top_corner">
         <img id="profile_photo" src="images/niceGuy.jpg">
-        <a href="#" onclick="signOut();">Sign out</a>
+        <a onclick="signOut()">Sign out</a>
       </div>
       </header>
       <div id="today">
-      <p id="date"> Monday, 25 April 2016</p>
-      <div id="meals">
-      <img src="images/left.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="back_arrow">
-      <div id="meal1" class="meal_card flip">
-          <h1 class="meal_header" id="meal_header1"> <span class="bold">Meal 1 </span>&middot 9:00am</h1>
-          <article class="meal front">
-            <img src="/images/salad.jpg">
-            <h2> Vegetable Rice</h2>
-            <div class="mealInfo">  
-              <div class="numbers">
-                  <p > 640 </p>
-                  <p> 32g </p>
-                  <p> 12g </p>
-                  <p> 14g </p>
-                </div>
-                <div>
-                  <p> Kilocalories </p>
-                  <p> Protein </p>
-                  <p> Carbs </p>
-                  <p> Fat </p>
-                </div>
-              </div>
-              <div class="meal_button"> Select Meal </div>
-              <div class="meal_button bottom"> I Don't Like This </div>
-          </article>
-          <article class="back">
-            <div class="mealInfo">  
-              <div class="numbers">
-                  <p > 640 </p>
-                  <p> 32g </p>
-                  <p> 12g </p>
-                  <p> 14g </p>
-                </div>
-                <div>
-                  <p> Kilocalories </p>
-                  <p> Protein </p>
-                  <p> Carbs </p>
-                  <p> Fat </p>
-                </div>
-              </div>
-          </article>
-        </div>
-      <div id="meal2"  class="meal_card">
-          <h1 class="meal_header"> <span class="bold">Meal 2 </span>&middot 1:00pm</h1>
-          <article class="meal">
-            <img src="/images/pasta.png">
-            <h2>Pasta Bolognese</h2>
+        <p id="date"> Monday, 25 April 2016</p>
+        <div id="meals">
+          <img src="images/left.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="back_arrow">
+          <div id="meal1" class="meal_card flip">
+              <h1 class="meal_header" id="meal_header1"> <span class="bold">Meal 1 </span>&middot; 9:00am</h1>
+              <article class="meal front">
+                <div class="thumb" style="background: url(/images/salad.jpg) 50% 50% no-repeat; width: 150px; height: 150px;"></div>
+                <h2> Vegetable Rice</h2>
+                <div class="mealInfo">  
+                  <div class="numbers">
+                      <p> 640 </p>
+                      <p> 32g </p>
+                      <p> 12g </p>
+                      <p> 14g </p>
+                    </div>
+                    <div>
+                      <p> Kilocalories </p>
+                      <p> Protein </p>
+                      <p> Carbs </p>
+                      <p> Fat </p>
+                    </div>
+                  </div>
+                  <div class="meal_button"> Select Meal </div>
+                  <div class="meal_button bottom"> I Don't Like This </div>
+              </article>
+              <!-- <article class="back">
+                <div class="mealInfo">  
+                  <div class="numbers">
+                      <p > 640 </p>
+                      <p> 32g </p>
+                      <p> 12g </p>
+                      <p> 14g </p>
+                    </div>
+                    <div>
+                      <p> Kilocalories </p>
+                      <p> Protein </p>
+                      <p> Carbs </p>
+                      <p> Fat </p>
+                    </div>
+                  </div>
+              </article> -->
+          </div>
+          <div id="meal2"  class="meal_card">
+              <h1 class="meal_header"> <span class="bold">Meal 2 </span>&middot; 1:00pm</h1>
+              <article class="meal">
+                <div class="thumb" style="background: url(/images/pasta.jpg) 50% 50% no-repeat; width: 150px; height: 150px;"></div>
+                <h2>Pasta Bolognese</h2>
+                  <div class="mealInfo">  
+                  <div class="numbers">
+                      <p > 560 </p>
+                      <p> 22g </p>
+                      <p> 18g </p>
+                      <p> 67g </p>
+                    </div>
+                    <div>
+                      <p> Kilocalories </p>
+                      <p> Protein </p>
+                      <p> Carbs </p>
+                      <p> Fat </p>
+                    </div>
+                  </div>
+                  <div class="meal_button"> Select Meal </div>
+                  <div class="meal_button bottom"> I Don't Like This </div>
+              </article>
+          </div>
+          <div id="meal3"  class="meal_card">
+            <h1 class="meal_header" id="meal_header3"> <span class="bold">Meal 3 </span>&middot; 7:00pm</h1>
+            <article class="meal" id="meal3_inner">
+              <!-- <img src="/images/salad.jpg" width="150"> -->
+              <div class="thumb" style="background: url(/images/salad.jpg) 50% 50% no-repeat; width: 150px; height: 150px;"></div>
+              <h2> Vegetable Rice</h2>
               <div class="mealInfo">  
-              <div class="numbers">
-                  <p > 560 </p>
-                  <p> 22g </p>
-                  <p> 18g </p>
-                  <p> 67g </p>
+                <div class="numbers">
+                    <p > 640 </p>
+                    <p> 32g </p>
+                    <p> 12g </p>
+                    <p> 14g </p>
+                  </div>
+                  <div>
+                    <p> Kilocalories </p>
+                    <p> Protein </p>
+                    <p> Carbs </p>
+                    <p> Fat </p>
+                  </div>
                 </div>
-                <div>
-                  <p> Kilocalories </p>
-                  <p> Protein </p>
-                  <p> Carbs </p>
-                  <p> Fat </p>
-                </div>
-              </div>
-              <div class="meal_button"> Select Meal </div>
-              <div class="meal_button bottom"> I Don't Like This </div>
-          </article>
+                <div class="meal_button"> Select Meal </div>
+                <div class="meal_button bottom"> I Don't Like This </div>
+            </article>
+          </div>
+          <img src="images/right.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="forward_arrow">
         </div>
-        <div id="meal3"  class="meal_card">
-          <h1 class="meal_header" id="meal_header3"> <span class="bold">Meal 3 </span>&middot 7:00pm</h1>
-          <article class="meal" id="meal3_inner">
-            <img src="/images/salad.jpg">
-            <h2> Vegetable Rice</h2>
-            <div class="mealInfo">  
-              <div class="numbers">
-                  <p > 640 </p>
-                  <p> 32g </p>
-                  <p> 12g </p>
-                  <p> 14g </p>
-                </div>
-                <div>
-                  <p> Kilocalories </p>
-                  <p> Protein </p>
-                  <p> Carbs </p>
-                  <p> Fat </p>
-                </div>
-              </div>
-              <div class="meal_button"> Select Meal </div>
-              <div class="meal_button bottom"> I Don't Like This </div>
-          </article>
-        </div>
-        <img src="images/right.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="forward_arrow">
-        </div>
-        </div>
+      </div>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
       function getQueryVariable(variable) {
@@ -331,14 +339,57 @@
         // document.getElementById('email_hidden').value = email
         // document.getElementById('name').textContent = JSON.parse(xhr.responseText)["name"];
         document.getElementById('profile_photo').src = JSON.parse(xhr.responseText)["image"];
+
+
+        // send request to 
+        var u = '/api/generate?activityLevel=' + JSON.parse(xhr.responseText)["activity_level"]
+                  + "&weight=" + JSON.parse(xhr.responseText)["weight"]
+                  + "&goal=" + JSON.parse(xhr.responseText)["goal"];
+        var x = new XMLHttpRequest();
+        x.open('GET', u);
+        x.setRequestHeader('Content-Type', 'text/json');
+        x.onload = function() {
+          console.log('Signed in as: ' + x.responseText);
+          document.getElementById('date').src = JSON.parse(x.responseText)["dateString"];
+          document.getElementsByClassName('thumb')[0].style.background = "url("+ JSON.parse(x.responseText)["meals"][0].image +") 50% 50% no-repeat";
+          document.getElementById('meal1').getElementsByTagName('h2')[0].textContent = JSON.parse(x.responseText)["meals"][0].title;
+
+          document.getElementById('meal1').getElementsByTagName('p')[0].textContent = JSON.parse(x.responseText)["meals"][0].calories;
+          document.getElementById('meal1').getElementsByTagName('p')[1].textContent = JSON.parse(x.responseText)["meals"][0].protein;
+          document.getElementById('meal1').getElementsByTagName('p')[2].textContent = JSON.parse(x.responseText)["meals"][0].carbs;
+          document.getElementById('meal1').getElementsByTagName('p')[3].textContent = JSON.parse(x.responseText)["meals"][0].fat;
+
+          // document.getElementById('meal2').getElementsByTagName('img')[0].src = JSON.parse(x.responseText)["meals"][1].image;
+          document.getElementsByClassName('thumb')[1].style.background = "url("+ JSON.parse(x.responseText)["meals"][1].image +") 50% 50% no-repeat";
+          document.getElementById('meal2').getElementsByTagName('h2')[0].textContent = JSON.parse(x.responseText)["meals"][1].title;
+
+          document.getElementById('meal2').getElementsByTagName('p')[0].textContent = JSON.parse(x.responseText)["meals"][1].calories;
+          document.getElementById('meal2').getElementsByTagName('p')[1].textContent = JSON.parse(x.responseText)["meals"][1].protein;
+          document.getElementById('meal2').getElementsByTagName('p')[2].textContent = JSON.parse(x.responseText)["meals"][1].carbs;
+          document.getElementById('meal2').getElementsByTagName('p')[3].textContent = JSON.parse(x.responseText)["meals"][1].fat;
+
+          // document.getElementById('meal3').getElementsByTagName('img')[0].src = JSON.parse(x.responseText)["meals"][2].image;
+          document.getElementsByClassName('thumb')[2].style.background = "url("+ JSON.parse(x.responseText)["meals"][2].image +") 50% 50% no-repeat";
+          document.getElementById('meal3').getElementsByTagName('h2')[0].textContent = JSON.parse(x.responseText)["meals"][2].title;
+
+          document.getElementById('meal3').getElementsByTagName('p')[0].textContent = JSON.parse(x.responseText)["meals"][2].calories;
+          document.getElementById('meal3').getElementsByTagName('p')[1].textContent = JSON.parse(x.responseText)["meals"][2].protein;
+          document.getElementById('meal3').getElementsByTagName('p')[2].textContent = JSON.parse(x.responseText)["meals"][2].carbs;
+          document.getElementById('meal3').getElementsByTagName('p')[3].textContent = JSON.parse(x.responseText)["meals"][2].fat;
+        };
+        x.send();
+
+
       };
       xhr.send();
 
       function signOut() {
+        window.location = "/";
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
           console.log('User signed out.');
           // sign out on server
+          window.location = "/";
         });
       }
     </script>
