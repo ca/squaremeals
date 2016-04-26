@@ -11,191 +11,189 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="../public/js/jquery.flip.min.js"></script>
+    <script src="/js/jquery.flip.min.js"></script>
     <style>
-    @font-face {
-      font-family: 'Avenir Next';
-      src: url(/fonts/AvenirNext-Regular.otf);
-    }
-    @font-face {
-      font-family: 'Avenir Next Bold';
-      src: url(/fonts/AvenirNext-Bold.otf);
-    }
-    body {
-      padding: 0px;
-      margin: 0px;
-      background-color: #001D3E;
-      background: linear-gradient(to bottom right, #001D3E 50%, #002754);
-      background-attachment:fixed;
-      background-repeat:no-repeat;
-      background-size:cover;
-      color: white;
-      font-family: 'Avenir Next';
-      font-size: 17px;
-    }
-    #container{
-      width: 95%;
-      max-width: 1350px;
-      margin: auto;
-      text-align: center;
-    }
-    #logo {
-      text-align: left;
-      font-size: 25px;
-      font-weight: 400;
-      letter-spacing: 10px;
-      margin-top: 40px;
-      float: left;
-    }
-    #logo span {
-      font-family: 'Avenir Next Bold';
-    }
-    #profile_photo{
-      border-radius: 50%;
-      width: 50px;
-      -webkit-box-shadow: 0 7px 6px -6px black;
-	  -moz-box-shadow: 0 7px 6px -6px black;
-	  box-shadow: 0 7px 6px -6px black;
-      margin-top: 30px;
-      margin-bottom: 40px;
-      float: left;
-    }
-    #top_corner{
-      float:right;
-      width: 200px;
-    }
-    #top_corner a{
-      font-family: 'Avenir Next Bold';
-      text-transform: uppercase;
-      color: white;
-      margin-top: 45px;
-      margin-left: 15px;
-      float: left;
-    }
-    #top_corner a:hover{
-      cursor: pointer;
-      opacity: .8;
-      text-decoration: none;
-      text-decoration: none;
-    }
-    .meal {
-      background: linear-gradient(to bottom, #00AEFF, #004CA4);
-      background-color: lightblue;
-      border-radius: 8px;
-      height: 400px;
-      width: 290px;
-      float: left;
-      margin-right: 80px;
-      margin-top: 80px;
-    }
-    .meal img {
-      border-radius: 50%;
-      margin-top: -65px;
-    }
-    .thumb {
-      border-radius: 50%;
-      margin-top: -65px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .meal h2 {
-      font-family: 'Avenir Next Bold';
-      font-size: 17px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .mealInfo{
-      text-align: left;
-    }
-    .mealInfo .numbers{
-      font-family: 'Avenir Next Bold';
-      text-align: right;
-      width: 40%;
-      float: left;
-      margin-right: 10px;
-    }
-    .meal_button{
-      border: solid 1px white;
-      border-radius: 20px;
-      padding-top: 5px;
-      height: 35px;
-      width: 230px;
-      text-align: center;
-      margin: auto;
-      margin-top: 20px;
-      background-image: url(images/check.png);
-      background-repeat: no-repeat;
-      background-position: 20px 10px; 
-    }
-    .meal_button:hover{
-      background-color: white;
-      cursor: pointer;
-      color: #005cb3;
-    }
-    .meal_header{
+      @font-face {
+        font-family: 'Avenir Next';
+        src: url(/fonts/AvenirNext-Regular.otf);
+      }
+      @font-face {
+        font-family: 'Avenir Next Bold';
+        src: url(/fonts/AvenirNext-Bold.otf);
+      }
+      body {
+        padding: 0px;
+        margin: 0px;
+        background-color: #001D3E;
+        background: linear-gradient(to bottom right, #001D3E 50%, #002754);
+        background-attachment:fixed;
+        background-repeat:no-repeat;
+        background-size:cover;
+        color: white;
+        font-family: 'Avenir Next';
+        font-size: 17px;
+      }
+      #container{
+        width: 95%;
+        max-width: 1350px;
+        margin: auto;
+        text-align: center;
+      }
+      #logo {
+        text-align: left;
+        font-size: 25px;
+        font-weight: 400;
+        letter-spacing: 10px;
+        margin-top: 40px;
+        float: left;
+      }
+      #logo span {
+        font-family: 'Avenir Next Bold';
+      }
+      #profile_photo{
+        border-radius: 50%;
+        width: 50px;
+        -webkit-box-shadow: 0 7px 6px -6px black;
+  	  -moz-box-shadow: 0 7px 6px -6px black;
+  	  box-shadow: 0 7px 6px -6px black;
+        margin-top: 30px;
+        margin-bottom: 40px;
+        float: left;
+      }
+      #top_corner{
+        float:right;
+        width: 200px;
+      }
+      #top_corner a{
+        font-family: 'Avenir Next Bold';
+        text-transform: uppercase;
+        color: white;
+        margin-top: 45px;
+        margin-left: 15px;
+        float: left;
+      }
+      #top_corner a:hover{
+        cursor: pointer;
+        opacity: .8;
+        text-decoration: none;
+        text-decoration: none;
+      }
+      .meal {
+        background: linear-gradient(to bottom, #00AEFF, #004CA4);
+        background-color: lightblue;
+        border-radius: 8px;
+        height: 400px;
+        width: 290px;
+        float: left;
+        margin-right: 80px;
+        margin-top: 80px;
+      }
+      .meal img {
+        border-radius: 50%;
+        margin-top: -65px;
+      }
+      .thumb {
+        border-radius: 50%;
+        margin-top: -65px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .meal h2 {
+        font-family: 'Avenir Next Bold';
         font-size: 17px;
         text-transform: uppercase;
-        margin-left: -80px;
-    }
-    .bottom{
-      margin-top: 10px;
-      background-image: url(images/X.png);
-    }
-    #meal1, #meal2, #meal3{
-        float: left;
-        margin-bottom: 50px;
-    }
-    #meal3_inner{
-      margin-right: 0px;
-      float: left;
-    }
-    #meal_header3{
-      margin-left: 0px;
-    }
-    header{
-      height: 150px;
-    }
-    #today{
-      width: 100%;
-      display: block;
-      margin: auto;
-    }
-    #date{
-        margin-bottom: 60px;
-        text-transform: uppercase;
-    }
-    .bold{
+        margin-bottom: 20px;
+      }
+      .mealInfo{
+        text-align: left;
+      }
+      .mealInfo .numbers{
         font-family: 'Avenir Next Bold';
-    }
-    #back_arrow{
-      float: left;
-      margin-top: 250px;
-      margin-right: 50px;
-    }
-    #forward_arrow{
-      float: left;
-      margin-left: 50px;
-      margin-top: 250px;
-    }
-    .arrow:hover{
-      cursor: pointer;
-      opacity: .4;
-    }
-    #meals{
-      max-width: 1260px;
-      margin: auto;
-      padding-left: 20px;
-    }
+        text-align: right;
+        width: 40%;
+        float: left;
+        margin-right: 10px;
+      }
+      .meal_button{
+        border: solid 1px white;
+        border-radius: 20px;
+        padding-top: 5px;
+        height: 35px;
+        width: 230px;
+        text-align: center;
+        margin: auto;
+        margin-top: 20px;
+        background-image: url(images/check.png);
+        background-repeat: no-repeat;
+        background-position: 20px 10px; 
+      }
+      .meal_button:hover{
+        background-color: white;
+        cursor: pointer;
+        color: #005cb3;
+      }
+      .meal_header{
+          font-size: 17px;
+          text-transform: uppercase;
+          margin-left: -80px;
+      }
+      .bottom{
+        margin-top: 10px;
+        background-image: url(images/X.png);
+      }
+      #meal1, #meal2, #meal3{
+          float: left;
+          margin-bottom: 50px;
+      }
+      #meal3_inner{
+        margin-right: 0px;
+        float: left;
+      }
+      #meal_header3{
+        margin-left: 0px;
+      }
+      header{
+        height: 150px;
+      }
+      #today{
+        width: 100%;
+        display: block;
+        margin: auto;
+      }
+      #date{
+          margin-bottom: 60px;
+          text-transform: uppercase;
+      }
+      .bold{
+          font-family: 'Avenir Next Bold';
+      }
+      #back_arrow{
+        float: left;
+        margin-top: 250px;
+        margin-right: 50px;
+      }
+      #forward_arrow{
+        float: left;
+        margin-left: 50px;
+        margin-top: 250px;
+      }
+      .arrow:hover{
+        cursor: pointer;
+        opacity: .4;
+      }
+      #meals{
+        max-width: 1260px;
+        margin: auto;
+        padding-left: 20px;
+      }
     </style>
-    
     <script>
-    $(function(){
-        $(".flip").flip({
-            trigger: 'click'
-        });
-    });
-</script>
-    
+      // $(function(){
+      //   $(".flip").flip({
+      //     trigger: 'click'
+      //   });
+      // });
+    </script>
   </head>
   <body>
     <div id="container">
@@ -229,7 +227,7 @@
                       <p> Fat </p>
                     </div>
                   </div>
-                  <div class="meal_button"> Select Meal </div>
+                  <div class="meal_button" onClick="openLink(0)"> Select Meal </div>
                   <div class="meal_button bottom" onClick="replaceMeal1(this)"> I Don't Like This </div>
               </article>
           </div>
@@ -252,7 +250,7 @@
                       <p> Fat </p>
                     </div>
                   </div>
-                  <div class="meal_button"> Select Meal </div>
+                  <div class="meal_button" onClick="openLink(1)"> Select Meal </div>
                   <div class="meal_button bottom" onClick="replaceMeal2(this)"> I Don't Like This </div>
               </article>
           </div>
@@ -275,7 +273,7 @@
                     <p> Fat </p>
                   </div>
                 </div>
-                <div class="meal_button"> Select Meal </div>
+                <div class="meal_button" onClick="openLink(2)"> Select Meal </div>
                 <div class="meal_button bottom" onClick="replaceMeal3(this)"> I Don't Like This </div>
             </article>
           </div>
@@ -304,6 +302,7 @@
         console.log('Query variable %s not found', variable);
       }
 
+      var meals = [];
       var email = getQueryVariable('email')
       var url = '/users/find?email=' + email;
       var xhr = new XMLHttpRequest();
@@ -325,32 +324,45 @@
         x.setRequestHeader('Content-Type', 'text/json');
         x.onload = function() {
           console.log('Signed in as: ' + x.responseText);
-          document.getElementById('date').src = JSON.parse(x.responseText)["dateString"];
-          document.getElementsByClassName('thumb')[0].style.background = "url("+ JSON.parse(x.responseText)["meals"][0].image +") 50% 50% no-repeat";
-          document.getElementById('meal1').getElementsByTagName('h2')[0].textContent = JSON.parse(x.responseText)["meals"][0].title;
 
-          document.getElementById('meal1').getElementsByTagName('p')[0].textContent = JSON.parse(x.responseText)["meals"][0].calories;
-          document.getElementById('meal1').getElementsByTagName('p')[1].textContent = JSON.parse(x.responseText)["meals"][0].protein;
-          document.getElementById('meal1').getElementsByTagName('p')[2].textContent = JSON.parse(x.responseText)["meals"][0].carbs;
-          document.getElementById('meal1').getElementsByTagName('p')[3].textContent = JSON.parse(x.responseText)["meals"][0].fat;
+          var response = JSON.parse(x.responseText);
+          meals = response['meals'];
+
+          for (i=0; i<meals.length; i++) {
+            
+            var imageURL = meals[i].image;
+            meals[i].url = imageURL.replace('recipeImages', 'recipes');
+            meals[i].url = response["meals"][i].url.slice(0,meals[i].url.length-4);
+            console.log(meals[i].url);
+
+            if (meals[i].title.length > 21) {
+              meals[i].title = meals[i].title.substring(0, 20) + "...";
+            }
+          }
+
+          document.getElementById('date').src = response["dateString"];
+          document.getElementsByClassName('thumb')[0].style.background = "url("+ meals[0].image +") 50% 50% no-repeat";
+          document.getElementById('meal1').getElementsByTagName('h2')[0].textContent = meals[0].title;
+          document.getElementById('meal1').getElementsByTagName('p')[0].textContent = meals[0].calories;
+          document.getElementById('meal1').getElementsByTagName('p')[1].textContent = meals[0].protein;
+          document.getElementById('meal1').getElementsByTagName('p')[2].textContent = meals[0].carbs;
+          document.getElementById('meal1').getElementsByTagName('p')[3].textContent = meals[0].fat;
 
           // document.getElementById('meal2').getElementsByTagName('img')[0].src = JSON.parse(x.responseText)["meals"][1].image;
-          document.getElementsByClassName('thumb')[1].style.background = "url("+ JSON.parse(x.responseText)["meals"][1].image +") 50% 50% no-repeat";
-          document.getElementById('meal2').getElementsByTagName('h2')[0].textContent = JSON.parse(x.responseText)["meals"][1].title;
-
-          document.getElementById('meal2').getElementsByTagName('p')[0].textContent = JSON.parse(x.responseText)["meals"][1].calories;
-          document.getElementById('meal2').getElementsByTagName('p')[1].textContent = JSON.parse(x.responseText)["meals"][1].protein;
-          document.getElementById('meal2').getElementsByTagName('p')[2].textContent = JSON.parse(x.responseText)["meals"][1].carbs;
-          document.getElementById('meal2').getElementsByTagName('p')[3].textContent = JSON.parse(x.responseText)["meals"][1].fat;
+          document.getElementsByClassName('thumb')[1].style.background = "url("+ meals[1].image +") 50% 50% no-repeat";
+          document.getElementById('meal2').getElementsByTagName('h2')[0].textContent = meals[1].title;
+          document.getElementById('meal2').getElementsByTagName('p')[0].textContent = meals[1].calories;
+          document.getElementById('meal2').getElementsByTagName('p')[1].textContent = meals[1].protein;
+          document.getElementById('meal2').getElementsByTagName('p')[2].textContent = meals[1].carbs;
+          document.getElementById('meal2').getElementsByTagName('p')[3].textContent = meals[1].fat;
 
           // document.getElementById('meal3').getElementsByTagName('img')[0].src = JSON.parse(x.responseText)["meals"][2].image;
-          document.getElementsByClassName('thumb')[2].style.background = "url("+ JSON.parse(x.responseText)["meals"][2].image +") 50% 50% no-repeat";
-          document.getElementById('meal3').getElementsByTagName('h2')[0].textContent = JSON.parse(x.responseText)["meals"][2].title;
-
-          document.getElementById('meal3').getElementsByTagName('p')[0].textContent = JSON.parse(x.responseText)["meals"][2].calories;
-          document.getElementById('meal3').getElementsByTagName('p')[1].textContent = JSON.parse(x.responseText)["meals"][2].protein;
-          document.getElementById('meal3').getElementsByTagName('p')[2].textContent = JSON.parse(x.responseText)["meals"][2].carbs;
-          document.getElementById('meal3').getElementsByTagName('p')[3].textContent = JSON.parse(x.responseText)["meals"][2].fat;
+          document.getElementsByClassName('thumb')[2].style.background = "url("+ meals[2].image +") 50% 50% no-repeat";
+          document.getElementById('meal3').getElementsByTagName('h2')[0].textContent = meals[2].title;
+          document.getElementById('meal3').getElementsByTagName('p')[0].textContent = meals[2].calories;
+          document.getElementById('meal3').getElementsByTagName('p')[1].textContent = meals[2].protein;
+          document.getElementById('meal3').getElementsByTagName('p')[2].textContent = meals[2].carbs;
+          document.getElementById('meal3').getElementsByTagName('p')[3].textContent = meals[2].fat;
         };
         x.send();
 
@@ -369,6 +381,11 @@
         });
       });
 
+      function openLink(index) {
+        var url = meals[index].url;
+        var win = window.open(url, '_blank');
+        win.focus();
+      }
 
       function replaceMeal1(el) {
         var meal = $(el).parent('.meal');

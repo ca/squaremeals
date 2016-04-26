@@ -67,6 +67,7 @@ router.get('/generate', function(req, res, next) {
   //   , maxcarbs = 0
   //   , maxfat = 0
   //   , maxprotein = 0
+  var kcal = 0;
   var mincalories = 0
     , minprotein = 0
     , mincarbs = 0
@@ -82,6 +83,7 @@ router.get('/generate', function(req, res, next) {
   }, function (error, response, body) {
     console.log(error);
     console.log(body);
+    kcal = body.kilocalories;
     mincalories = body.kilocalories / 3;
     minprotein = body.protein / 3;
     mincarbs = body.carbs / 3;
@@ -103,6 +105,11 @@ router.get('/generate', function(req, res, next) {
           +'&minfat='+minfat
           +'&minprotein='+minprotein;
 
+  var newUrl = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?'
+  +'targetCalories=' + kcal
+  +'&timeFrame=day'
+
+
   request({
     url: url,
     method: 'GET',
@@ -112,7 +119,6 @@ router.get('/generate', function(req, res, next) {
   }, function (error, response, body) {
     if(error) { console.log(error); callback(true); return; }
 
-
     var d = new Date();
     var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     var monthnames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -121,6 +127,7 @@ router.get('/generate', function(req, res, next) {
     var day = d.getDate();
     var month = monthnames[d.getMonth()];
     var dateString = n + ", " + day + " " + month + " " + d.getFullYear();
+
 
     var meals = [ JSON.parse(body)[0], JSON.parse(body)[1], JSON.parse(body)[2] ];
     console.log(body);
