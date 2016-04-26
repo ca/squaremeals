@@ -15,7 +15,7 @@ router.get('/auth/google/return',
 
 
 router.get('/login', function(req, res, next) {
-	res.send("PLEASE LOGIN BITCH");
+	res.send("PLEASE LOGIN");
 });
 
 // router.post('/login',

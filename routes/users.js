@@ -25,7 +25,7 @@ router.get('/register', function(req, res, next) {
           console.log(r);
 
           // Erroring here for some reason...
-          res.send("SIGN UP PAGE HERE");
+          res.sendFile('signup.html', {root: 'views' });
 
       });
     }
