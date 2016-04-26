@@ -334,6 +334,7 @@
       function onSignIn(googleUser) {
         var id_token = googleUser.getAuthResponse().id_token;
         var profile = googleUser.getBasicProfile();
+        
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
@@ -341,12 +342,17 @@
         document.getElementById('profile_photo').src = profile.getImageUrl();
         // AJAX request to server, if user found -> profile (sign in on server)
         // else -> register form;
-        var url = '/users/register?email=' + profile.getEmail() + '&image=' + profile.getImageUrl();
+        var url = '/users/register?email=' + profile.getEmail()
+                  + '&image=' + profile.getImageUrl()
+                  + '&name=' + profile.getName();
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url);
         xhr.setRequestHeader('Content-Type', 'text/json');
         xhr.onload = function() {
-          console.log('Signed in as: ' + xhr.responseText);
+          // if (xhr.responseText.redirect) {
+          window.location = JSON.parse(xhr.responseText)["redirect"];
+          // }
+          console.log('Signed in as: ' + JSON.parse(xhr.responseText)["redirect"]);
         };
         xhr.send();
       }
