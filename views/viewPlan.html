@@ -187,22 +187,6 @@
       padding-left: 20px;
     }
     </style>
-    <script>
-      
-    $(document).ready(function () {
-      $('.bottom').click(function () {
-        var meal = $(this).parent('.meal');
-        $(meal).effect("shake","slow");
-        $(meal).contents().fadeOut(function() {
-          $(meal).contents().fadeIn();
-        });
-      });
-      $('.meal_card').hover(function () {
-        $('.meal_card').css('opacity', '.5');
-        $(this).css('opacity', 1);
-      });
-    });
-    </script>
     
     <script>
     $(function(){
@@ -229,7 +213,7 @@
           <div id="meal1" class="meal_card flip">
               <h1 class="meal_header" id="meal_header1"> <span class="bold">Meal 1 </span>&middot; 9:00am</h1>
               <article class="meal front">
-                <div class="thumb" style="background: url(/images/salad.jpg) 50% 50% no-repeat; width: 150px; height: 150px;"></div>
+                <div class="thumb" style="width: 150px; height: 150px;"></div>
                 <h2> Vegetable Rice</h2>
                 <div class="mealInfo">  
                   <div class="numbers">
@@ -246,33 +230,17 @@
                     </div>
                   </div>
                   <div class="meal_button"> Select Meal </div>
-                  <div class="meal_button bottom"> I Don't Like This </div>
+                  <div class="meal_button bottom" onClick="replaceMeal1(this)"> I Don't Like This </div>
               </article>
-              <!-- <article class="back">
-                <div class="mealInfo">  
-                  <div class="numbers">
-                      <p > 640 </p>
-                      <p> 32g </p>
-                      <p> 12g </p>
-                      <p> 14g </p>
-                    </div>
-                    <div>
-                      <p> Kilocalories </p>
-                      <p> Protein </p>
-                      <p> Carbs </p>
-                      <p> Fat </p>
-                    </div>
-                  </div>
-              </article> -->
           </div>
           <div id="meal2"  class="meal_card">
               <h1 class="meal_header"> <span class="bold">Meal 2 </span>&middot; 1:00pm</h1>
               <article class="meal">
-                <div class="thumb" style="background: url(/images/pasta.jpg) 50% 50% no-repeat; width: 150px; height: 150px;"></div>
+                <div class="thumb" style="width: 150px; height: 150px;"></div>
                 <h2>Pasta Bolognese</h2>
                   <div class="mealInfo">  
                   <div class="numbers">
-                      <p > 560 </p>
+                      <p> 560 </p>
                       <p> 22g </p>
                       <p> 18g </p>
                       <p> 67g </p>
@@ -285,18 +253,17 @@
                     </div>
                   </div>
                   <div class="meal_button"> Select Meal </div>
-                  <div class="meal_button bottom"> I Don't Like This </div>
+                  <div class="meal_button bottom" onClick="replaceMeal2(this)"> I Don't Like This </div>
               </article>
           </div>
           <div id="meal3"  class="meal_card">
             <h1 class="meal_header" id="meal_header3"> <span class="bold">Meal 3 </span>&middot; 7:00pm</h1>
             <article class="meal" id="meal3_inner">
-              <!-- <img src="/images/salad.jpg" width="150"> -->
-              <div class="thumb" style="background: url(/images/salad.jpg) 50% 50% no-repeat; width: 150px; height: 150px;"></div>
-              <h2> Vegetable Rice</h2>
+              <div class="thumb" style="width: 150px; height: 150px;"></div>
+              <h2>Vegetable Rice</h2>
               <div class="mealInfo">  
                 <div class="numbers">
-                    <p > 640 </p>
+                    <p> 640 </p>
                     <p> 32g </p>
                     <p> 12g </p>
                     <p> 14g </p>
@@ -309,7 +276,7 @@
                   </div>
                 </div>
                 <div class="meal_button"> Select Meal </div>
-                <div class="meal_button bottom"> I Don't Like This </div>
+                <div class="meal_button bottom" onClick="replaceMeal3(this)"> I Don't Like This </div>
             </article>
           </div>
           <img src="images/right.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="forward_arrow">
@@ -317,6 +284,14 @@
       </div>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
+
+      var backup_meals = [
+        {"id":168243,"title":"Slow-Cooker Squash Casserole","image":"https://spoonacular.com/recipeImages/Slow-Cooker-Squash-Casserole-168243.jpg","imageType":"jpg","calories":151,"protein":"6g","fat":"10g","carbs":"11g"},
+        {"id":237610,"title":"Pesto Halibut Kebabs","image":"https://spoonacular.com/recipeImages/Pesto-Halibut-Kebabs-237610.jpg","imageType":"jpg","calories":209,"protein":"32g","fat":"7g","carbs":"3g"},
+        {"id":247306,"title":"Bulgur Upma Or Tabouli","image":"https://spoonacular.com/recipeImages/Bulgur-Upma-Or-Tabouli-247306.jpg","imageType":"jpg","calories":604,"protein":"31g","fat":"11g","carbs":"101g"},
+        {"id":211559,"title":"Prawn, grapefruit & avocado salad","image":"https://spoonacular.com/recipeImages/Prawn--grapefruit---avocado-salad-211559.jpg","imageType":"jpg","calories":1287,"protein":"38g","fat":"71g","carbs":"139g"}
+      ]
+
       function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split('&');
@@ -382,6 +357,60 @@
 
       };
       xhr.send();
+
+
+      $(document).ready(function () {
+        // $('.bottom').click(function () {
+          
+        // });
+        $('.meal_card').hover(function () {
+          $('.meal_card').css('opacity', '.5');
+          $(this).css('opacity', 1);
+        });
+      });
+
+
+      function replaceMeal1(el) {
+        var meal = $(el).parent('.meal');
+        $(meal).effect("shake","slow");
+        $(meal).contents().fadeOut(function() {
+          document.getElementsByClassName('thumb')[0].style.background = "url("+ backup_meals[0].image +") 50% 50% no-repeat";
+          document.getElementById('meal1').getElementsByTagName('h2')[0].textContent = backup_meals[0].title;
+          document.getElementById('meal1').getElementsByTagName('p')[0].textContent = backup_meals[0].calories;
+          document.getElementById('meal1').getElementsByTagName('p')[1].textContent = backup_meals[0].protein;
+          document.getElementById('meal1').getElementsByTagName('p')[2].textContent = backup_meals[0].carbs;
+          document.getElementById('meal1').getElementsByTagName('p')[3].textContent = backup_meals[0].fat;
+          $(meal).contents().fadeIn();
+        });
+      }
+
+      function replaceMeal2(el) {
+        var meal = $(el).parent('.meal');
+        $(meal).effect("shake","slow");
+        $(meal).contents().fadeOut(function() {
+          document.getElementsByClassName('thumb')[1].style.background = "url("+ backup_meals[1].image +") 50% 50% no-repeat";
+          document.getElementById('meal2').getElementsByTagName('h2')[0].textContent = backup_meals[1].title;
+          document.getElementById('meal2').getElementsByTagName('p')[0].textContent = backup_meals[1].calories;
+          document.getElementById('meal2').getElementsByTagName('p')[1].textContent = backup_meals[1].protein;
+          document.getElementById('meal2').getElementsByTagName('p')[2].textContent = backup_meals[1].carbs;
+          document.getElementById('meal2').getElementsByTagName('p')[3].textContent = backup_meals[1].fat;
+          $(meal).contents().fadeIn();
+        });
+      }
+
+      function replaceMeal3(el) {
+        var meal = $(el).parent('.meal');
+        $(meal).effect("shake","slow");
+        $(meal).contents().fadeOut(function() {
+          document.getElementsByClassName('thumb')[2].style.background = "url("+ backup_meals[2].image +") 50% 50% no-repeat";
+          document.getElementById('meal3').getElementsByTagName('h2')[0].textContent = backup_meals[2].title;
+          document.getElementById('meal3').getElementsByTagName('p')[0].textContent = backup_meals[2].calories;
+          document.getElementById('meal3').getElementsByTagName('p')[1].textContent = backup_meals[2].protein;
+          document.getElementById('meal3').getElementsByTagName('p')[2].textContent = backup_meals[2].carbs;
+          document.getElementById('meal3').getElementsByTagName('p')[3].textContent = backup_meals[2].fat;
+          $(meal).contents().fadeIn();
+        });
+      }
 
       function signOut() {
         window.location = "/";
