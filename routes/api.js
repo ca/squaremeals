@@ -3,9 +3,14 @@ var express = require('express')
 var async = require('async');
 var router = express.Router();
 
-/* GET home page. */
+/* GET API home page. */
 router.get('/', function(req, res, next) {
   res.send({'API Version': '1.0'});
+});
+
+router.post('/testing', function(req, res, next) {
+	console.log(req.body);
+	res.send('Thanks Bitch.');
 });
 
 router.get('/intake', function(req, res, next) {
@@ -26,7 +31,6 @@ router.get('/intake', function(req, res, next) {
   if (activityLevel > 2) { multiplier = 1.3; }
   if (activityLevel >= 5) { multiplier = 1.8; }
   
-
   console.log(req.query);
 
   kilocalories = weight * 10 * multiplier; // determines MAINTENANCE Calories
@@ -61,6 +65,10 @@ router.get('/estimate', function(req, res, next) {
   });
 });
 
+// --------------------------------------------- //
+//              Generate Meal Plan               //
+// This route is the genMealPlan acceptance test //
+// --------------------------------------------- //
 router.get('/generate', function(req, res, next) {
 
   // var maxcalories = 0

@@ -198,16 +198,16 @@
   <body>
     <div id="container">
       <header>
-      <h1 id="logo">SQUARE<span>MEALS</span></h1>
-      <div id="top_corner">
-        <img id="profile_photo" src="images/niceGuy.jpg">
-        <a onclick="signOut()">Sign out</a>
-      </div>
+        <h1 id="logo">SQUARE<span>MEALS</span></h1>
+        <div id="top_corner">
+          <img id="profile_photo" src="images/niceGuy.jpg">
+          <a onclick="signOut()">Sign out</a>
+        </div>
       </header>
       <div id="today">
         <p id="date"> Monday, 25 April 2016</p>
         <div id="meals">
-          <img src="images/left.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="back_arrow">
+          <img src="images/left.png" class="arrow" width="30" height="100" style="visibility:hidden;-webkit-filter: invert(100%); opacity: .8;" id="back_arrow">
           <div id="meal1" class="meal_card flip">
               <h1 class="meal_header" id="meal_header1"> <span class="bold">Meal 1 </span>&middot; 9:00am</h1>
               <article class="meal front">
@@ -277,7 +277,7 @@
                 <div class="meal_button bottom" onClick="replaceMeal3(this)"> I Don't Like This </div>
             </article>
           </div>
-          <img src="images/right.png" class="arrow" width="30" height="100" style="-webkit-filter: invert(100%); opacity: .8;" id="forward_arrow">
+          <img src="images/right.png" class="arrow" width="30" height="100" style="visibility:hidden;-webkit-filter: invert(100%); opacity: .8;" id="forward_arrow">
         </div>
       </div>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -302,6 +302,11 @@
         console.log('Query variable %s not found', variable);
       }
 
+      // --------------------------------------------- //
+      //                 Load Meal Plan                //
+      // This function is part of the loadMealPlan     //
+      // acceptance test                               //
+      // --------------------------------------------- //
       var meals = [];
       var email = getQueryVariable('email')
       var url = '/users/find?email=' + email;
@@ -313,7 +318,6 @@
         // document.getElementById('email_hidden').value = email
         // document.getElementById('name').textContent = JSON.parse(xhr.responseText)["name"];
         document.getElementById('profile_photo').src = JSON.parse(xhr.responseText)["image"];
-
 
         // send request to 
         var u = '/api/generate?activityLevel=' + JSON.parse(xhr.responseText)["activity_level"]
@@ -365,16 +369,10 @@
           document.getElementById('meal3').getElementsByTagName('p')[3].textContent = meals[2].fat;
         };
         x.send();
-
-
       };
       xhr.send();
 
-
       $(document).ready(function () {
-        // $('.bottom').click(function () {
-          
-        // });
         $('.meal_card').hover(function () {
           $('.meal_card').css('opacity', '.5');
           $(this).css('opacity', 1);
@@ -387,6 +385,11 @@
         win.focus();
       }
 
+      // --------------------------------------------- //
+      //                Change a Meal                  //
+      // This function is for the changeMeal           //
+      // acceptance test                               //
+      // --------------------------------------------- //
       function replaceMeal1(el) {
         var meal = $(el).parent('.meal');
         $(meal).effect("shake","slow");
@@ -400,7 +403,6 @@
           $(meal).contents().fadeIn();
         });
       }
-
       function replaceMeal2(el) {
         var meal = $(el).parent('.meal');
         $(meal).effect("shake","slow");
@@ -414,7 +416,6 @@
           $(meal).contents().fadeIn();
         });
       }
-
       function replaceMeal3(el) {
         var meal = $(el).parent('.meal');
         $(meal).effect("shake","slow");
@@ -434,11 +435,9 @@
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
           console.log('User signed out.');
-          // sign out on server
           window.location = "/";
         });
       }
-    </script>
-    
+    </script> 
   </body>
 </html>

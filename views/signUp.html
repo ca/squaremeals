@@ -188,6 +188,11 @@
         console.log('Query variable %s not found', variable);
       }
 
+      // --------------------------------------------- //
+      //             Enter User Information            //
+      // This function is for the enterUsrInfo         //
+      // acceptance test                               //
+      // --------------------------------------------- //
       var email = getQueryVariable('email')
       var url = '/users/find?email=' + email;
       var xhr = new XMLHttpRequest();
@@ -200,20 +205,6 @@
         document.getElementById('profile_photo').src = JSON.parse(xhr.responseText)["image"];
       };
       xhr.send();
-
-      // function onSignIn(googleUser) {
-        // var id_token = googleUser.getAuthResponse().id_token;
-        // var profile = googleUser.getBasicProfile();
-        
-
-        // var xhr = new XMLHttpRequest();
-        // xhr.open('POST', 'localhost:3000/api/tokensignin');
-        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        // xhr.onload = function() {
-        //   console.log('Signed in as: ' + xhr.responseText);
-        // };
-        // xhr.send('idtoken=' + id_token);
-      // }
 
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();

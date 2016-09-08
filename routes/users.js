@@ -1,10 +1,5 @@
 var express = require('express');
 var router = express.Router();
-// var bodyParser = require('body-parser')
-// app.use( bodyParser.json() );       // to support JSON-encoded bodies
-// app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-//   extended: true
-// })); 
 
 var db = require('../db');
 
@@ -16,7 +11,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/register', function(req, res, next) {
-  // var username = req.query.username,
   var email = req.query.email
       , name = req.query.name
       , image = req.query.image;
@@ -30,24 +24,18 @@ router.get('/register', function(req, res, next) {
         'image': image,
         'name': name
       }, function(err, r) {
-          console.log("Inserted a document into the users collection.");
-          console.log(r);
-          // Erroring here for some reason...
           res.send({redirect: '/signup?email='+email});
-          // res.sendFile('signup.html', {root: 'views' });
-
       });
     } else {
-      console.log("Found a user, skip to meals page");
-      console.log(result);
-      // res.send("MEALS PAGE HERE");
       res.send({redirect: '/dashboard?email='+email});
     }
   });
 });
-
+// --------------------------------------------- //
+//             Enter User Information            //
+// This route - the enterUsrInfo acceptance test //
+// --------------------------------------------- //
 router.post('/register', function(req, res, next) {
-  console.log(req.body);
   db.get().collection('users').update({
     'email': req.body.email
   }, {
