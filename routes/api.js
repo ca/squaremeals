@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/testing', function(req, res, next) {
 	console.log(req.body);
-	res.send('Thanks Bitch.');
+	res.send('Thanks.');
 });
 
 router.get('/intake', function(req, res, next) {
