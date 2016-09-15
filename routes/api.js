@@ -122,7 +122,7 @@ router.get('/generate', function(req, res, next) {
     url: url,
     method: 'GET',
     headers: {
-      'X-Mashape-Key': 'VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S'
+      'X-Mashape-Key': process.env.MASHAPE_KEY
     }
   }, function (error, response, body) {
     if(error) { console.log(error); callback(true); return; }
@@ -164,7 +164,7 @@ router.get('/generate', function(req, res, next) {
   //       url: url,
   //       method: 'GET',
   //       headers: {
-  //         'X-Mashape-Key': 'VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S'
+  //         'X-Mashape-Key': ''
   //       }
   //     }, function (error, response, body) {
   //       if(error) { console.log(error); callback(true); return; }
@@ -179,7 +179,7 @@ router.get('/generate', function(req, res, next) {
   //       url: url,
   //       method: 'GET',
   //       headers: {
-  //         'X-Mashape-Key': 'VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S'
+  //         'X-Mashape-Key': ''
   //       }
   //     }, function (error, response, body) {
   //       if(error) { console.log(error); callback(true); return; }
@@ -194,6 +194,6 @@ router.get('/generate', function(req, res, next) {
   // });
 
 
-  // set header with X-Mashape-Key: VaEsGPU3LNmshtyBxE7TFUSmXekRp1IY7hajsnaiUW2M7IPG2S
+  // set header with X-Mashape-Key: 
 });
 module.exports = router;
