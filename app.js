@@ -62,8 +62,8 @@ db.connect(url, function(err, database) {
 
   // authentication
   passport.use(new GoogleStrategy({
-      clientID: '914794274234-c782h3krbtbjplt8s9m2bfnsass1vueb.apps.googleusercontent.com',
-      clientSecret: 'eJMHjGWtK921kVdBOdajBbD9',
+      clientID: process.env.SQUAREMEALS_GOOGLE_CLIENT_ID,
+      clientSecret: process.env.SQUAREMEALS_GOOGLE_CLIENT_SECRET,
 
       callbackURL: "http://locahost:3000/auth/google/callback"
     },

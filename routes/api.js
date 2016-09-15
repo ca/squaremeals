@@ -122,7 +122,7 @@ router.get('/generate', function(req, res, next) {
     url: url,
     method: 'GET',
     headers: {
-      'X-Mashape-Key': process.env.MASHAPE_KEY
+      'X-Mashape-Key': process.env.SQUAREMEALS_MASHAPE_KEY
     }
   }, function (error, response, body) {
     if(error) { console.log(error); callback(true); return; }
