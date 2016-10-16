@@ -58,8 +58,6 @@
       margin: auto;
       margin-bottom: 50px;
     }
-    div.abcRioButton.abcRioButtonLightBlue{
-    }
     .meal {
       background: linear-gradient(to bottom, #00AEFF, #004CA4);
       background-color: lightblue;
@@ -201,8 +199,7 @@
         $('.top_sign_in').fadeOut(function() {
             $('#catchy-phrase').fadeIn();
         });
-      }
-      else{
+      } else {
         $('#catchy-phrase').fadeOut(function() {
           $('#logo').fadeIn();
           $('.top_sign_in').fadeIn();
@@ -317,24 +314,7 @@
     </div>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
-      function onSignIn(googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
-        var profile = googleUser.getBasicProfile();
-
-        document.getElementById('profile_photo').src = profile.getImageUrl();
-        var url = '/users/register?email=' + profile.getEmail()
-                  + '&image=' + profile.getImageUrl()
-                  + '&name=' + profile.getName();
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
-        xhr.setRequestHeader('Content-Type', 'text/json');
-        xhr.onload = function() {
-          window.location = JSON.parse(xhr.responseText)["redirect"];
-          console.log('Signed in as: ' + JSON.parse(xhr.responseText)["redirect"]);
-        };
-        xhr.send();
-      }
-
+      function onSignIn(googleUser) { console.log(googleUser); }
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
