@@ -5,11 +5,21 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
+    mongoose = require('mongoose'),
     React = require('react'),
     ReactDOMServer = require('react-dom/server'),
     DOM = React.DOM, body = DOM.body, div = DOM.div, script = DOM.script;
 
+var User = require('./models/User.js');
+
 var app = express();
+mongoose.connect('mongodb://localhost/test');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Connected to test database');
+});
+
 var reactApp = React.createFactory(require('./ReactApp'));
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
@@ -21,32 +31,63 @@ app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+// When a session is created, a user must be serialized into the session
 passport.serializeUser(function(user, done) {
-  done(null, user);
+    // 
+    // NOTE: In this example, only the user ID is serialized to the session
+    // keeping the amount of data stored within the session small. When
+    // subsequent requests are received, this ID is used to find the user,
+    // which will be restored to req.user.
+    // 
+    // done(null, user);
+    done(null, user.id);
 });
 
+// Deserialize a user from the session
 passport.deserializeUser(function(id, done) {
-  done(null, id);
+    User.findById(id, function(err, user) {
+        done(err, user)
+    });
+    // done(null, id);
 });
 
-passport.use(new GoogleStrategy({
+passport.use(
+    new GoogleStrategy({
         clientID: process.env.SQUAREMEALS_GOOGLE_CLIENT_ID,
         clientSecret: process.env.SQUAREMEALS_GOOGLE_CLIENT_SECRET,
         callbackURL: "http://localhost:3000/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
         console.log(profile);
-        return done(null, profile);
-        // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        //     return done(err, user);
-        // });
-    }
-));
-
+        // return done(null, profile);
+        // 
+        // Below is essentially a "findOrCreate" call for a User
+        // 
+        User.findOne({ 'google.id': profile.id }, function(err, user) {
+            if (err) { return done(err); }
+            if (!user) {
+                user = new User({
+                    name: profile.displayName,
+                    email: profile.emails[0].value,
+                    provider: 'google',
+                    //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
+                    google: profile._json
+                });
+                user.save(function(err) {
+                    if (err) console.log(err);
+                    return done(err, user);
+                });
+            } else {
+                //found user. Return
+                return done(err, user);
+            }
+        });
+    })
+);
 
 app.get('/', function(req, res) {
-    console.log(req.user);
-
 
     var props = {
         user: req.user,
@@ -111,7 +152,7 @@ app.get('/bundle.js', function(req, res) {
       .pipe(res)
 });
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+app.get('/auth/google', passport.authenticate('google', { scope: ['openid profile email'] }));
 
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
@@ -120,10 +161,24 @@ app.get('/auth/google/callback',
     });
 
 app.get('/login', function(req, res) {
+    // 
+    // When the login operation completes, user will be assigned to req.user.
+    // Note: passport.authenticate() middleware invokes req.login() automatically.
+    // This function is primarily used when users sign up, during which
+    // req.login() can be invoked to automatically log in the newly registered user.
+    // 
+    // req.login(user, function(err) {
+    //     if (err) { return next(err); }
+    //     return res.redirect('/users/' + req.user.username);
+    // });
     console.log('SOME KIND OF ERROR');
     res.send('ERROR');
 });
 
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
 
 app.listen(3000);
 console.log("App listening on port 3000....");
