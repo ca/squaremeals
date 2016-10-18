@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="google-signin-client_id" content="914794274234-c782h3krbtbjplt8s9m2bfnsass1vueb.apps.googleusercontent.com">
+    
+    <title>SquareMeals</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="icon" href="images/icon.ico">
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+
+    <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+    <!-- <script src="http://code.jquery.com/jquery-1.10.2.js"></script> -->
+    
+    <script src="https://unpkg.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="/js/jquery.flip.min.js"></script>
+
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1 id="logo">SQUARE<span>MEALS</span></h1>
+        <div id="top_corner">
+          <img id="profile_photo" src="images/niceGuy.jpg">
+          <a onclick="signOut()">Sign out</a>
+        </div>
+      </header>
+
+
+      <div id="today">
+        <p id="date">Monday, 25 April 2016</p>
+
+        <div id="meals"></div>
+
+      </div>
+    </div>
+
+    <script type="text/babel" src="/js/meals.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script>
+
+      var backup_meals = [
+        {"id":168243,"title":"Slow-Cooker Squash Casserole","image":"https://spoonacular.com/recipeImages/Slow-Cooker-Squash-Casserole-168243.jpg","imageType":"jpg","calories":151,"protein":"6g","fat":"10g","carbs":"11g"},
+        {"id":237610,"title":"Pesto Halibut Kebabs","image":"https://spoonacular.com/recipeImages/Pesto-Halibut-Kebabs-237610.jpg","imageType":"jpg","calories":209,"protein":"32g","fat":"7g","carbs":"3g"},
+        {"id":247306,"title":"Bulgur Upma Or Tabouli","image":"https://spoonacular.com/recipeImages/Bulgur-Upma-Or-Tabouli-247306.jpg","imageType":"jpg","calories":604,"protein":"31g","fat":"11g","carbs":"101g"},
+        {"id":211559,"title":"Prawn, grapefruit & avocado salad","image":"https://spoonacular.com/recipeImages/Prawn--grapefruit---avocado-salad-211559.jpg","imageType":"jpg","calories":1287,"protein":"38g","fat":"71g","carbs":"139g"}
+      ]
+
+      function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+          }
+        }
+        console.log('Query variable %s not found', variable);
+      }
+
+      // --------------------------------------------- //
+      //                 Load Meal Plan                //
+      // This function is part of the loadMealPlan     //
+      // acceptance test                               //
+      // --------------------------------------------- //
+      var meals = [];
+      var email = getQueryVariable('email')
+      var url = '/users/find?email=' + email;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+
+
+
+
+      xhr.setRequestHeader('Content-Type', 'text/json');
+
+
+      xhr.onload = function() {
+        console.log('Signed in as: ' + xhr.responseText);
+        // document.getElementById('email_hidden').value = email
+        // document.getElementById('name').textContent = JSON.parse(xhr.responseText)["name"];
+        document.getElementById('profile_photo').src = JSON.parse(xhr.responseText)["image"];
+
+        // send request to 
+        var u = '/api/generate?activityLevel=' + JSON.parse(xhr.responseText)["activity_level"]
+                  + "&weight=" + JSON.parse(xhr.responseText)["weight"]
+                  + "&goal=" + JSON.parse(xhr.responseText)["goal"];
+        var x = new XMLHttpRequest();
+        x.open('GET', u);
+        x.setRequestHeader('Content-Type', 'text/json');
+        x.onload = function() {
+          console.log('Signed in as: ' + x.responseText);
+
+          var response = JSON.parse(x.responseText);
+          meals = response['meals'];
+
+          for (i=0; i<meals.length; i++) {
+            
+            var imageURL = meals[i].image;
+            meals[i].url = imageURL.replace('recipeImages', 'recipes');
+            meals[i].url = response["meals"][i].url.slice(0,meals[i].url.length-4);
+            console.log(meals[i].url);
+
+            if (meals[i].title.length > 21) {
+              meals[i].title = meals[i].title.substring(0, 20) + "...";
+            }
+          }
+
+          document.getElementById('date').src = response["dateString"];
+          document.getElementsByClassName('thumb')[0].style.background = "url("+ meals[0].image +") 50% 50% no-repeat";
+          document.getElementById('meal1').getElementsByTagName('h2')[0].textContent = meals[0].title;
+          document.getElementById('meal1').getElementsByTagName('p')[0].textContent = meals[0].calories;
+          document.getElementById('meal1').getElementsByTagName('p')[1].textContent = meals[0].protein;
+          document.getElementById('meal1').getElementsByTagName('p')[2].textContent = meals[0].carbs;
+          document.getElementById('meal1').getElementsByTagName('p')[3].textContent = meals[0].fat;
+
+          // document.getElementById('meal2').getElementsByTagName('img')[0].src = JSON.parse(x.responseText)["meals"][1].image;
+          document.getElementsByClassName('thumb')[1].style.background = "url("+ meals[1].image +") 50% 50% no-repeat";
+          document.getElementById('meal2').getElementsByTagName('h2')[0].textContent = meals[1].title;
+          document.getElementById('meal2').getElementsByTagName('p')[0].textContent = meals[1].calories;
+          document.getElementById('meal2').getElementsByTagName('p')[1].textContent = meals[1].protein;
+          document.getElementById('meal2').getElementsByTagName('p')[2].textContent = meals[1].carbs;
+          document.getElementById('meal2').getElementsByTagName('p')[3].textContent = meals[1].fat;
+
+          // document.getElementById('meal3').getElementsByTagName('img')[0].src = JSON.parse(x.responseText)["meals"][2].image;
+          document.getElementsByClassName('thumb')[2].style.background = "url("+ meals[2].image +") 50% 50% no-repeat";
+          document.getElementById('meal3').getElementsByTagName('h2')[0].textContent = meals[2].title;
+          document.getElementById('meal3').getElementsByTagName('p')[0].textContent = meals[2].calories;
+          document.getElementById('meal3').getElementsByTagName('p')[1].textContent = meals[2].protein;
+          document.getElementById('meal3').getElementsByTagName('p')[2].textContent = meals[2].carbs;
+          document.getElementById('meal3').getElementsByTagName('p')[3].textContent = meals[2].fat;
+        };
+        x.send();
+      };
+      xhr.send();
+
+      $(document).ready(function () {
+        $('.meal_card').hover(function () {
+          $('.meal_card').css('opacity', '.5');
+          $(this).css('opacity', 1);
+        });
+      });
+
+      function openLink(index) {
+        var url = meals[index].url;
+        var win = window.open(url, '_blank');
+        win.focus();
+      }
+
+      // --------------------------------------------- //
+      //                Change a Meal                  //
+      // This function is for the changeMeal           //
+      // acceptance test                               //
+      // --------------------------------------------- //
+      function replaceMeal1(el) {
+        var meal = $(el).parent('.meal');
+        $(meal).effect("shake","slow");
+        $(meal).contents().fadeOut(function() {
+          document.getElementsByClassName('thumb')[0].style.background = "url("+ backup_meals[0].image +") 50% 50% no-repeat";
+          document.getElementById('meal1').getElementsByTagName('h2')[0].textContent = backup_meals[0].title;
+          document.getElementById('meal1').getElementsByTagName('p')[0].textContent = backup_meals[0].calories;
+          document.getElementById('meal1').getElementsByTagName('p')[1].textContent = backup_meals[0].protein;
+          document.getElementById('meal1').getElementsByTagName('p')[2].textContent = backup_meals[0].carbs;
+          document.getElementById('meal1').getElementsByTagName('p')[3].textContent = backup_meals[0].fat;
+          $(meal).contents().fadeIn();
+        });
+      }
+      function replaceMeal2(el) {
+        var meal = $(el).parent('.meal');
+        $(meal).effect("shake","slow");
+        $(meal).contents().fadeOut(function() {
+          document.getElementsByClassName('thumb')[1].style.background = "url("+ backup_meals[1].image +") 50% 50% no-repeat";
+          document.getElementById('meal2').getElementsByTagName('h2')[0].textContent = backup_meals[1].title;
+          document.getElementById('meal2').getElementsByTagName('p')[0].textContent = backup_meals[1].calories;
+          document.getElementById('meal2').getElementsByTagName('p')[1].textContent = backup_meals[1].protein;
+          document.getElementById('meal2').getElementsByTagName('p')[2].textContent = backup_meals[1].carbs;
+          document.getElementById('meal2').getElementsByTagName('p')[3].textContent = backup_meals[1].fat;
+          $(meal).contents().fadeIn();
+        });
+      }
+      function replaceMeal3(el) {
+        var meal = $(el).parent('.meal');
+        $(meal).effect("shake","slow");
+        $(meal).contents().fadeOut(function() {
+          document.getElementsByClassName('thumb')[2].style.background = "url("+ backup_meals[2].image +") 50% 50% no-repeat";
+          document.getElementById('meal3').getElementsByTagName('h2')[0].textContent = backup_meals[2].title;
+          document.getElementById('meal3').getElementsByTagName('p')[0].textContent = backup_meals[2].calories;
+          document.getElementById('meal3').getElementsByTagName('p')[1].textContent = backup_meals[2].protein;
+          document.getElementById('meal3').getElementsByTagName('p')[2].textContent = backup_meals[2].carbs;
+          document.getElementById('meal3').getElementsByTagName('p')[3].textContent = backup_meals[2].fat;
+          $(meal).contents().fadeIn();
+        });
+      }
+
+      function signOut() {
+        window.location = "/";
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+          window.location = "/";
+        });
+      }
+    </script> 
+  </body>
+</html>
